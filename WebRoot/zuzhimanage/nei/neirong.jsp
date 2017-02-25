@@ -29,12 +29,9 @@
      Connection conn=null;
      Statement stmt=null;
      ResultSet rs=null;
-     if(request.getParameter("yonghuming")!=null)
-     session.setAttribute("yonghuming", request.getParameter("yonghuming"));
-     if(request.getParameter("yonghukahao")!=null)
-     session.setAttribute("yonghukahao", request.getParameter("yonghukahao"));
-System.out.println(session.getAttribute("yonghukahao").toString());
-System.out.println(session.getAttribute("yonghuming").toString());
+     if(request.getParameter("zuzhiming")!=null)
+     session.setAttribute("neiming", request.getParameter("zuzhiming"));
+System.out.println(session.getAttribute("neiming").toString());
      //连接数据库并初始数据
       try{
        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
@@ -43,22 +40,11 @@ System.out.println(session.getAttribute("yonghuming").toString());
 		String PWD = "sky123456";
 		conn = DriverManager.getConnection(URL, USER, PWD);
        stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-       String sql="select * from person";
-       if((session.getAttribute("yonghukahao").toString()!=null)&&(session.getAttribute("yonghukahao").toString()!=""))
-       {
-	       if(session.getAttribute("yonghuming").toString()!=null&&session.getAttribute("yonghuming").toString()!="")
+       String sql="select * from nei";
+	       if(session.getAttribute("neiming").toString()!=null&&session.getAttribute("neiming").toString()!="")
 	       {
-	       sql=sql+" where personname Like '%"+session.getAttribute("yonghuming").toString().trim()+"%' and personIDcard='"+session.getAttribute("yonghukahao").toString().trim()+"'";
-	    	}else{
-	    	sql=sql+" where personIDcard='"+session.getAttribute("yonghukahao").toString().trim()+"'";
+	       sql=sql+" where name Like '%"+session.getAttribute("neiming").toString().trim()+"%'";
 	    	};
-    	}else if(session.getAttribute("yonghukahao").toString()==null||session.getAttribute("yonghukahao").toString()=="")
-    	{
-    		if(session.getAttribute("yonghuming").toString()!=null&&session.getAttribute("yonghuming").toString()!="")
-	       {
-	       sql=sql+" where personname Like '%"+session.getAttribute("yonghuming").toString().trim()+"%'";
-	    	};
-    	};
     	System.out.println(sql);
        rs=stmt.executeQuery(sql);
        //将指标移至最后一条记录
@@ -103,9 +89,9 @@ if(RowCount>0){  %>
    
    	<table cellspacing="0" cellpadding="0" style="margin-left:0px;margin-top:5px;border:1px solid #CCCCCC;width:90%;">
 	<tr>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">用户名</td>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">卡号</td>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">部门</td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">企业名称</td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">地址</td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">法人代表</td>
 	<td colspan=2 style="border:1px solid #CCCCCC;height:20px;"  align="center">操作</td>
 	</tr>    
     <%
@@ -114,11 +100,11 @@ if(RowCount>0){  %>
      {
     %>  
 	<tr>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personname")%></td>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personIDcard")%></td>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personbumen") %></td>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><a href="DeleteRecord.jsp?recordid=<%=rs.getString("personIDcard")%>" onClick="return confirm('确认删除吗？删除用户，则用户所有的信息将一并删除');">删除</a></td>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><a href="ModifyRecord.jsp?recordid=<%=rs.getString("personIDcard")%>">修改</a></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("name")%></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("dizhi")%></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("faren") %></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><a href="DeleteRecord.jsp?recordid=<%=rs.getString("id")%>" onClick="return confirm('确认删除吗？删除企业，则该企业所有的信息将一并删除');">删除</a></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><a href="ModifyRecord.jsp?recordid=<%=rs.getString("id")%>">修改</a></td>
 	</tr>
      <p>    
      <%
@@ -185,7 +171,7 @@ if(RowCount>0){  %>
 </center>
 
  <%}else{
-out.println("<center>不存在此用户！</center>");
+out.println("<center>不存在此企业！</center>");
  };  
      //执行关闭各个对象的操作
     try{

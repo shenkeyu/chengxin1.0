@@ -21,23 +21,23 @@
 				<div id='personxinxi'  style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='yonghumanage/yonghumain.jsp'">
 				<img src="image/menu/self_16.png" alt="用户管理" style="height:18px;width:18px;vertical-align:middle;"/>用户管理</div>
 				
-				<div id='zuzhixinxi' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='zuzhimanage/nei/zuzhimain.jsp'">
+				<div id='zuzhixinxi' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='zuzhimanage/nei/main.jsp'">
 				<img src="image/menu/handover_32.png" alt="内分包商管理" style="height:18px;width:18px;vertical-align:middle;"/>内分包商管理</div>
 
-				<div id='zuzhixinxi' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='zuzhimanage/wai/zuzhimain.jsp'">
+				<div id='zuzhixinxi' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='zuzhimanage/wai/main.jsp'">
 				<img src="image/menu/handover_32.png" alt="外分包商管理" style="height:18px;width:18px;vertical-align:middle;"/>外分包商管理</div>
 				
-				<div id='zuzhixinxi' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='zuzhimanage/gong/zuzhimain.jsp'">
+				<div id='zuzhixinxi' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='zuzhimanage/gong/main.jsp'">
 				<img src="image/menu/handover_32.png" alt="供应商管理" style="height:18px;width:18px;vertical-align:middle;"/>供应商管理</div>
 		
 				<div id='xinyongguanli'><img src="image/menu/biButton/joystick.png" alt="信用管理" style="height:18px;width:18px;vertical-align:middle;"/>信用管理</div>
 				<div id='grxy' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='gerenxinyong/grxymain.jsp'">
 				<img src="image/menu/biButton/doc_jieyue.png" alt="个人信用" style="height:18px;width:18px;vertical-align:middle;"/>个人信用</div>
-				<div id='nfbsxy' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='neixinyong/neixymain.jsp'">
+				<div id='nfbsxy' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='neixinyong/main.jsp'">
 				<img src="image/menu/biButton/doc_jieyue.png" alt="内分包商信用" style="height:18px;width:18px;vertical-align:middle;"/>内分包商信用</div>
-				<div id='wfbsxy' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='neixinyong/neixymain.jsp'">
+				<div id='wfbsxy' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='waixinyong/main.jsp'">
 				<img src="image/menu/biButton/doc_jieyue.png" alt="外分包商信用" style="height:18px;width:18px;vertical-align:middle;"/>外分包商信用</div>
-				<div id='gysxy' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='neixinyong/neixymain.jsp'">
+				<div id='gysxy' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='gongxinyong/main.jsp'">
 				<img src="image/menu/biButton/doc_jieyue.png" alt="供应商信用" style="height:18px;width:18px;vertical-align:middle;"/>供应商信用</div>
 				
 				<div id='pingjiaguanli'><img src="image/menu/biButton/doc_shouwen.png" alt="评价管理" style="height:18px;width:18px;vertical-align:middle;"/>评价管理</div>

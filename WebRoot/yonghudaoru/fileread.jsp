@@ -23,7 +23,7 @@ function downfile(str)
 </script>
 
   <body>
-  <form  style="center" action="readfile" method="post" enctype="multipart/form-data">
+  <form name="form1" style="center" action="readfile" method="post" enctype="multipart/form-data">
   <label></label>
   <label></label>
   <table style="margin-left:40px;margin-top:25px;width:600px;cellspacing:0px;cellpadding:0px;border:0px;font-size:18px;">
@@ -78,7 +78,64 @@ function downfile(str)
 </form>
 <br>
 
-  <form  style="center" action="readfile" method="post" enctype="multipart/form-data">
+  <form name="form2" style="center" action="readfilemingqi" method="post" enctype="multipart/form-data">
+  <label></label>
+  <label></label>
+  <table style="margin-left:40px;margin-top:25px;width:600px;cellspacing:0px;cellpadding:0px;border:0px;font-size:18px;">
+    <tr>
+    <td colspan=2 align="center" style="width:600px;height:30px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
+    <b>名企用户导入</b>
+    </td>      
+    </tr>
+    <tr>
+      <td align="center" style="width:200px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
+     <br>    
+      选择读取文件
+         <br>
+         </td>
+      <td align="center" style="width:400px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
+         <br>
+      <label>
+        <input type="file" name="file"  value="浏览"/>
+      </label>
+         <br>
+         </td>
+    </tr>
+    <tr>
+      <td align="center" style="width:200px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
+         <br>
+      <label>
+        <input type="submit" name="Submit" value="提    交" />
+      </label> 
+         <br>
+         </td>
+      <td align="center"  style="width:400px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
+         <br>
+      <label>
+        <input type="reset" name="Submit2" value="重    置" />
+      </label>
+         <br>
+      </td>
+    </tr>
+        <tr>
+        <td colspan=2 align="center" style="width:600px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
+               <br>
+        <br>
+        <input type="button" value="下载导入模板格式" onclick="javascript:downfile('mobanmingqi.xlsx');">
+        <br>
+        <br>
+        注意：不要更改excel表格的后缀名xlsx,不要更改首行对应的标题，不要更改表格中单张表格的名称“renyuan”!!!
+                <br>
+        <br>
+					</td>
+    </tr>
+  </table>
+</form>
+<br>
+
+
+
+  <form name="form3" style="center" action="readfilenei" method="post" enctype="multipart/form-data">
   <label></label>
   <label></label>
   <table style="margin-left:40px;margin-top:25px;width:600px;cellspacing:0px;cellpadding:0px;border:0px;font-size:18px;">
@@ -121,10 +178,10 @@ function downfile(str)
         <td colspan=2 align="center" style="width:600px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
                <br>
         <br>
-        <input type="button" value="下载导入模板格式" onclick="javascript:downfile('moban.xlsx');">
+        <input type="button" value="下载导入模板格式" onclick="javascript:downfile('mobannei.xlsx');">
         <br>
         <br>
-        注意：不要更改excel表格的后缀名xlsx,不要更改首行对应的标题，不要更改表格中单张表格的名称“renyuan”!!!
+        注意：不要更改excel表格的后缀名xlsx,不要更改首行对应的标题，不要更改表格中单张表格的名称“qiye”!!!
                 <br>
         <br>
 					</td>
@@ -133,7 +190,7 @@ function downfile(str)
 </form>
 <br>
 
-  <form  style="center" action="readfile" method="post" enctype="multipart/form-data">
+  <form name="form4" style="center" action="readfilewai" method="post" enctype="multipart/form-data">
   <label></label>
   <label></label>
   <table style="margin-left:40px;margin-top:25px;width:600px;cellspacing:0px;cellpadding:0px;border:0px;font-size:18px;">
@@ -176,10 +233,10 @@ function downfile(str)
         <td colspan=2 align="center" style="width:600px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
                <br>
         <br>
-        <input type="button" value="下载导入模板格式" onclick="javascript:downfile('moban.xlsx');">
+        <input type="button" value="下载导入模板格式" onclick="javascript:downfile('mobanwai.xlsx');">
         <br>
         <br>
-        注意：不要更改excel表格的后缀名xlsx,不要更改首行对应的标题，不要更改表格中单张表格的名称“renyuan”!!!
+        注意：不要更改excel表格的后缀名xlsx,不要更改首行对应的标题，不要更改表格中单张表格的名称“qiye”!!!
                 <br>
         <br>
 					</td>
@@ -188,7 +245,7 @@ function downfile(str)
 </form>
 <br>
 
-  <form  style="center" action="readfile" method="post" enctype="multipart/form-data">
+  <form  name="form5" style="center" action="readfilegong" method="post" enctype="multipart/form-data">
   <label></label>
   <label></label>
   <table style="margin-left:40px;margin-top:25px;width:600px;cellspacing:0px;cellpadding:0px;border:0px;font-size:18px;">
@@ -231,10 +288,10 @@ function downfile(str)
         <td colspan=2 align="center" style="width:600px;height:80px;cellspacing:0px;cellpadding:0px;border:1px solid blue;font-size:18px;">
                <br>
         <br>
-        <input type="button" value="下载导入模板格式" onclick="javascript:downfile('moban.xlsx');">
+        <input type="button" value="下载导入模板格式" onclick="javascript:downfile('mobangong.xlsx');">
         <br>
         <br>
-        注意：不要更改excel表格的后缀名xlsx,不要更改首行对应的标题，不要更改表格中单张表格的名称“renyuan”!!!
+        注意：不要更改excel表格的后缀名xlsx,不要更改首行对应的标题，不要更改表格中单张表格的名称“qiye”!!!
                 <br>
         <br>
 					</td>

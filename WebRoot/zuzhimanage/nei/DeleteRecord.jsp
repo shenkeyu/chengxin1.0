@@ -6,7 +6,7 @@ if(quanxian.equals("综合计划处")){
 System.out.println("用户管理成功！");
 }else{
 System.out.println("用户管理失败！");
-out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
+out.println("<script>window.location.href='../../zhenhuaindex.html';</script>");
 };
 
 
@@ -18,7 +18,7 @@ request.setCharacterEncoding("utf-8");
 	     try{
 			     if(personIDcard!=null&&personIDcard!="")
 			     {
-			      String sql="delete from person where personIDcard=?;";    
+			      String sql="delete from nei where id=?";    
 		
 					    String [] param={personIDcard};
 					    SqlUtils sqlUtils=new SqlUtils();
@@ -26,19 +26,19 @@ request.setCharacterEncoding("utf-8");
 						System.out.println(flag);
 									      	  if(flag==true) 
 										      {
-										      String s2="用户删除成功";
+										      String s2="企业删除成功";
 											  out.println("<script>alert('"+s2+"');window.location.href='neirong.jsp';</script>");
 										      System.out.println(s2);
 										      }else
 										      {
-										      String s3="用户删除失败，此用户已被删除！";
+										      String s3="企业删除失败，此企业已被删除！";
 											  out.println("<script>alert('"+s3+"');window.location.href='neirong.jsp';</script>");
 										      System.out.println(s3);
 										      };
 				};
 		}catch(Exception e){
 		System.out.println(e.getMessage());
-		String s4="用户删除失败，没有此用户！";
+		String s4="企业删除失败，没有此企业！";
 		out.println("<script>alert('"+s4+"');window.location.href='neirong.jsp';</script>");
 		};
 %>

@@ -1,7 +1,7 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html; charset=gb2312"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <style type="text/css">
 #namess{
 border: none;
@@ -13,19 +13,19 @@ font-size:24px;
 
 
 
-<title>æŒ¯åè¯šä¿¡ä¿¡æ¯ç®¡ç†ç³»ç»Ÿ</title>
+<title>Õñ»ª³ÏĞÅĞÅÏ¢¹ÜÀíÏµÍ³</title>
 </head>
 
 <%
 String quanxian=session.getAttribute("bumen").toString();
 if(quanxian!=""||quanxian!=null){
-System.out.println("å¯ä»¥æŸ¥è¯¢ï¼");
+System.out.println("¿ÉÒÔ²éÑ¯£¡");
 }else{
-System.out.println("æŸ¥è¯¢å¤±è´¥ï¼");
+System.out.println("²éÑ¯Ê§°Ü£¡");
 out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
 };
 
-session.setAttribute("namecha", "");
+session.setAttribute("chaxunyonghu", "");
 %>
 
 
@@ -36,14 +36,14 @@ document.getElementById("neirong").src="neirongbenren.jsp";
 } 
 </script> 
 
-<body onload="javascript:document.getElementById('namess').focus();">
+<body onload="javascript:document.getElementById('mingzi').focus();">
 <div style="background-image: url(../image/gerenxinyong/gerenzhanshibj.png);margin-left:20px;margin-top:7px;height:130px;line-height:130px;overflow:hidden;font-size:25px;width:100%;position:relative;">
 <form name="formcha" target="neirong" action="grxyneirong.jsp">
 <div style="position:absolute;bottom:13px;left:20px;">
-<img src="../image/gerenxinyong/fontxingming.png" alt="å§“å" style="height:30px;width:65px;vertical-align:middle;"/>
-<input type="text" id="namecha" name="namecha">
-<img src="../image/gerenxinyong/btnsousuo.png" alt="æœç´¢" style="height:30px;width:50px;vertical-align:middle;cursor:pointer;" onclick="javascript:formcha.submit();"/>
-<img src="../image/gerenxinyong/chakanbenren.png" alt="æŸ¥çœ‹æœ¬äºº" style="height:30px;width:90px;vertical-align:middle;cursor:pointer;" onclick="chakanbenren();"/>
+<img src="../image/gerenxinyong/fontxingming.png" alt="ĞÕÃû" style="height:30px;width:65px;vertical-align:middle;"/>
+<input type="text" id="mingzi" name="mingzi">
+<img src="../image/gerenxinyong/btnsousuo.png" alt="ËÑË÷" style="height:30px;width:50px;vertical-align:middle;cursor:pointer;" onclick="javascript:formcha.submit();"/>
+<img src="../image/gerenxinyong/chakanbenren.png" alt="²é¿´±¾ÈË" style="height:30px;width:90px;vertical-align:middle;cursor:pointer;" onclick="chakanbenren();"/>
 </div>
 </form>
 </div>

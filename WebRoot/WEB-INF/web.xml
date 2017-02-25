@@ -15,10 +15,72 @@
     <param-value>uploads</param-value>
     </init-param>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>readfile</servlet-name>
     <url-pattern>/readfile</url-pattern>
   </servlet-mapping>
+   
+   
+    <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>readfilemingqi</servlet-name>
+    <servlet-class>zhenhua.message.servlet.readfilemingqi</servlet-class>
+    <init-param>
+    <param-name>savePath</param-name>
+    <param-value>uploads</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>readfilemingqi</servlet-name>
+    <url-pattern>/readfilemingqi</url-pattern>
+  </servlet-mapping>
+  
+  
+    <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>readfilenei</servlet-name>
+    <servlet-class>zhenhua.message.servlet.readfilenei</servlet-class>
+    <init-param>
+    <param-name>savePath</param-name>
+    <param-value>uploads</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>readfilenei</servlet-name>
+    <url-pattern>/readfilenei</url-pattern>
+  </servlet-mapping> 
+   
+     <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>readfilewai</servlet-name>
+    <servlet-class>zhenhua.message.servlet.readfilewai</servlet-class>
+    <init-param>
+    <param-name>savePath</param-name>
+    <param-value>uploads</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>readfilewai</servlet-name>
+    <url-pattern>/readfilewai</url-pattern>
+  </servlet-mapping> 
+  
+  
+      <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>readfilegong</servlet-name>
+    <servlet-class>zhenhua.message.servlet.readfilegong</servlet-class>
+    <init-param>
+    <param-name>savePath</param-name>
+    <param-value>uploads</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>readfilegong</servlet-name>
+    <url-pattern>/readfilegong</url-pattern>
+  </servlet-mapping>   
    
 </web-app>

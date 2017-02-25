@@ -80,6 +80,7 @@ public class readfile extends HttpServlet {
 			throws ServletException, IOException {
 		String file=doAttachment(request);
 		System.out.print("生成成功"+file);
+		try{
 		int jieguo=readExcelToDB(file);
 		if(jieguo==2){
 			request.setAttribute("message","数据导入成功！");
@@ -97,6 +98,15 @@ public class readfile extends HttpServlet {
 			request.setAttribute("message", "数据导入失败！");
 			request.getRequestDispatcher("yonghudaoru/result.jsp").forward(request, response);
 			}
+		} catch (FileNotFoundException e) {
+			request.setAttribute("message", "没有找到相关文件！");
+			request.getRequestDispatcher("yonghudaoru/result.jsp").forward(request, response);
+			e.printStackTrace();
+		} catch (IOException e) {
+			request.setAttribute("message", "发生异常，数据导入失败！");
+			request.getRequestDispatcher("yonghudaoru/result.jsp").forward(request, response);
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -142,8 +152,8 @@ public class readfile extends HttpServlet {
 				String personname=cell.trim();
 				cell=row.getCell(6).toString();
 				String persongangweizhiwu=cell.trim();
-				String sql="insert into person (personname,personpwd,personIDcard,personbumen,person2bumen,person3bumen,persongangweizhiwu) values (?,?,?,?,?,?,?)";
-				String [] param={personname,"123456",gonghao,bumen1,bumen2,bumen3,persongangweizhiwu};
+				String sql="insert into person (personname,personpwd,personIDcard,personbumen,person2bumen,person3bumen,persongangweizhiwu,renyuanleixing) values (?,?,?,?,?,?,?,?)";
+				String [] param={personname,"123456",gonghao,bumen1,bumen2,bumen3,persongangweizhiwu,"1"};
 				SqlUtils sqlUtils=new SqlUtils();
 				flag=sqlUtils.update(sql, param);
 					if(flag==true)
