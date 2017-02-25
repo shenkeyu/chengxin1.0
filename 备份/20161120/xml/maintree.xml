@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tree id='0' class='defaultTreeTable'>
+<item text='基础信息' id='jichuxinxi' class="firstitem" open="1">
+<item id='personxinxi' class="seconditem"  text='个人信息'/>
+<item id='zuzhixinxi' class="seconditem"   text='组织信息'/>
+</item>
+<item text='信用管理' id='xinyongguanli'  class="firstitem" open="0">
+<item id='grxy'  class="seconditem"  text='个人信用'/>
+<item id='nfbsxy' class="seconditem"   text='内分包商信用'/>
+<item id='wfbsxy'  class="seconditem"  text='外分包商信用'/>
+<item id='gysxy' class="seconditem"   text='供应商信用'/>
+</item>
+<item text='信用评价' id='xinyongpingjia'  class="firstitem" open="0">
+<item id='grpj'  class="seconditem"  text='个人评价'/>
+<item id='nfbspj' class="seconditem"   text='内分包商评价'/>
+<item id='wfbspj'  class="seconditem"  text='外分包商评价'/>
+<item id='gyspj'  class="seconditem"  text='供应商评价'/>
+</item>
+<item text='统计分析' id='tongjifenxi'  class="firstitem" open="0">
+<item id='monthtongji'  class="seconditem"  text='月度统计'/>
+<item id='jidutongji'  class="seconditem"  text='季度统计'/>
+<item id='yeartongji' class="seconditem"   text='年度统计'/>
+</item>
+<item text='系统管理' id='xitongguanli'  class="firstitem" open="0">
+<item id='pwdchange'  class="seconditem"  text='密码更改'/>
+<item id='personchange'  class="seconditem"  text='个人信息更改'/>
+<item id='zhiliangmubiao'  class="seconditem"  text='质量目标更改'/>
+<item id='shengchanjiedian'  class="seconditem"  text='生产节点目标更改'/>
+<item id='personin'  class="seconditem"  text='用户导入'/>
+<item id='beifenhuifu'  class="seconditem"  text='备份和恢复'/>
+</item>
+</tree>

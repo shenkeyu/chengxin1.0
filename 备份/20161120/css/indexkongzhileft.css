@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+#leftbody{
+	text-align:center;
+	width:240px;
+	    height:1090px;
+
+}
+
+#Content-Left{
+	height:1090px;
+    width:240px;
+  /* margin:20px; 设置元素跟其他元素的距离为20像素*/
+  	        background: #AFCBF3;  
+}
+
+#Left-logo{
+	padding-top:20px;
+	height:80px;
+    width:180px;
+    margin:0 auto;  /* 居中显示 */  
+}
+
+#firstpart{
+	padding-top:0px;
+	height:30px;
+    margin:0 auto;  /* 居中显示 */
+	background: #00B7FF;
+	font-size:24px;
+	align-content:center;
+	font:lighter;
+}
+
+#secondcontent{
+	padding-top:0px;
+	height:30px;
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:24px;
+	align-content:center;
+	font:lighter;
+}
+

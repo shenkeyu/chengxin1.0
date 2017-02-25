@@ -1,0 +1,351 @@
+@charset "utf-8";
+/* CSS Document */
+
+#leftbody{
+	text-align:center;
+	width:240px;
+	    height:1090px;
+
+}
+
+#Content-Left{
+	height:1090px;
+    width:240px;
+  /* margin:20px; 设置元素跟其他元素的距离为20像素*/
+  	        background: #AFCBF3;  
+}
+
+#Left-logo{
+	padding-top:20px;
+	height:80px;
+    width:180px;
+    margin:0 auto;  /* 居中显示 */
+    padding-bottom:20px;  
+}
+
+#jichuxinxi{
+	color:white;
+	padding-top:5px;	
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00B7FF;
+	font-size:23px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#personxinxi{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#zuzhixinxi{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#xinyongguanli{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00B7FF;
+	font-size:23px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#grxy{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#nfbsxy{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#wfbsxy{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#gysxy{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#pingjiaguanli{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00B7FF;
+	font-size:23px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#grpj{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#nfbspj{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#wfbspj{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#gyspj{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#tongjifenxi{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00B7FF;
+	font-size:23px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#monthtongji{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#jidutongji{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#yeartongji{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#xitongguanli{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00B7FF;
+	font-size:23px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#pwdchange{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#personchange{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#zhiliangmubiao{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#shengchanjiedian{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+#personin{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font:lighter;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+#beifenhuifu{
+	color:white;
+	padding-top:5px;
+	height:43px;line-height:43px;overflow:hidden;/*文字居中*/
+    margin:0 auto;  /* 居中显示 */
+	background: #00AFCC;
+	font-size:21px;
+	text-align:center;
+	font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif,黑体,宋体;
+	border-bottom:1px solid #FFFFFF;
+}
+
+
+
+
+

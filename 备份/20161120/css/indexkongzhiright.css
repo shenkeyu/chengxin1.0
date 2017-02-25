@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+#rightbody{
+	text-align:left;
+	width:745px;
+	    height:1090px;
+
+}
+
+#Content-Main{
+	height: 1090px;
+	width:745px;
+	left: 240px;	
+	background: #FCFCFC;
+    
+}
+/*注：Content-Left和Content-Main元素是Content元素的子元素，两个元素使用了float:left;设置成两列，这个两个元素的宽度和这个两个元素设置的padding、margin的和一定不能大于父层Content元素的宽度，否则设置列将失败*/

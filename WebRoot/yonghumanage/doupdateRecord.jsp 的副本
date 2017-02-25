@@ -1,0 +1,70 @@
+<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page language="java" import="zhenhua.sql.SqlUtils" pageEncoding="gb2312"%>
+<%
+String quanxian=session.getAttribute("bumen").toString().trim();
+if(quanxian.equals("综合计划处")){
+System.out.println("用户管理成功！");
+}else{
+System.out.println("用户管理失败！");
+out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
+};
+
+
+		request.setCharacterEncoding("utf-8");
+     	 String personIDcard=request.getParameter("recordid");
+					     	 boolean flag1=false;
+					    	 boolean flagpanduan1=false;
+					     	 String personname=request.getParameter("personname");
+						     String personpwd=request.getParameter("personpwd");
+						     String personbumen=request.getParameter("personbumen");
+						     String person2bumen=request.getParameter("person2bumen");
+						     String person3bumen=request.getParameter("person3bumen");
+						     String persongangweizhiwu=request.getParameter("persongangweizhiwu");
+							 if((personname!=null)&&(personpwd!=null)&&(personIDcard!=null)&&(personbumen!=null)&&(person2bumen!=null)&&(person3bumen!=null)&&(persongangweizhiwu!=null))
+						     {
+							     personname=personname.trim();
+							     personpwd=personpwd.trim();
+							     personIDcard=personIDcard.trim();
+							     personbumen=personbumen.trim();
+							     person2bumen=person2bumen.trim();
+							     person3bumen=person3bumen.trim();
+							     persongangweizhiwu=persongangweizhiwu.trim();
+							     if((personname!=null)&&(personpwd!=null)&&(personIDcard!=null)&&(personbumen!=null)&&(person2bumen!=null)&&(person3bumen!=null)&&(persongangweizhiwu!=null))
+							     {
+							     flagpanduan1=true;
+							     };
+							     System.out.println(flagpanduan1+personname);
+						     };
+						     if(flagpanduan1==true){     
+								 	  try{
+								      String sql1="update person set personname=?,personpwd=?,personbumen=?,person2bumen=?,person3bumen=?,persongangweizhiwu=? where personIDcard=?";  
+								      String sql2="update [person] set personname=?,personpwd=?,personbumen=?,person2bumen=?,person3bumen=?,persongangweizhiwu=? where personIDcard=?";
+									      if(personIDcard!=null)
+										  {				
+										    String [] param1={personname,personpwd,personbumen,person2bumen,person3bumen,persongangweizhiwu,personIDcard};
+										    SqlUtils sqlUtils1=new SqlUtils();
+											flag1=sqlUtils1.update(sql2, param1);
+											System.out.println(flag1);
+														      	  if(flag1==true) 
+															      {
+															      String s="用户修改成功";
+																  out.println("<script>alert('"+s+"');window.location.href='neirong.jsp';</script>");
+															      System.out.println(s);
+															      }else
+															      {
+															      String s="用户修改失败，不存在此卡号的用户！";
+																  out.println("<script>alert('"+s+"');window.location.href='neirong.jsp';</script>");
+															      System.out.println(s);
+															      };
+										  };
+								      }catch(Exception e){
+								       System.out.println(e.getMessage());
+								       	String s0="用户修改失败";
+										out.println("<script>alert('"+s0+"');window.location.href='neirong.jsp';</script>");  
+								      };
+					
+								};
+
+%>
+
+
