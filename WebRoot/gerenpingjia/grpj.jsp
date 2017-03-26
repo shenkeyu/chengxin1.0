@@ -1,7 +1,7 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html; charset=gb2312"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <style type="text/css">
 #namess{
 border: none;
@@ -13,16 +13,16 @@ font-size:24px;
 
 
 
-<title>æŒ¯åè¯šä¿¡ä¿¡æ¯ç®¡ç†ç³»ç»Ÿ</title>
+<title>Õñ»ª³ÏĞÅĞÅÏ¢¹ÜÀíÏµÍ³</title>
 </head>
 
 <%
 String quanxian=session.getAttribute("bumen").toString().trim();
 if(quanxian!=""||quanxian!=null){
-System.out.println("å¯ä»¥æŸ¥è¯¢ï¼");
+System.out.println("¿ÉÒÔ²éÑ¯£¡");
 System.out.println(quanxian);
 }else{
-System.out.println("æŸ¥è¯¢å¤±è´¥ï¼");
+System.out.println("²éÑ¯Ê§°Ü£¡");
 out.println("<script>window.location.href='../jieguo/error.jsp';</script>");
 };
 
@@ -32,22 +32,22 @@ out.println("<script>window.location.href='../jieguo/error.jsp';</script>");
 %>
 
 <body onload="javascript:document.getElementById('kahaocha').focus();">
-<%if(quanxian.equals("äººåŠ›èµ„æºéƒ¨")||quanxian.equals("QHSEéƒ¨")){
-System.out.println("å¯ä»¥æ˜¾ç¤ºç•Œé¢ï¼");
+<%if(quanxian.equals("ÈËÁ¦×ÊÔ´²¿")||quanxian.equals("QHSE²¿")){
+System.out.println("¿ÉÒÔÏÔÊ¾½çÃæ£¡");
 %>
 <form name="formcha" target="neirong" action="grpjmain.jsp">
 <div style="margin-top:13px;margin-left:20px;">
-IDå¡å·ï¼š<input type="text" id="kahaocha" name="kahaocha">
-è®¡åˆ†æ ‡å‡†ï¼š <input type="text" id="jifencha" name="jifencha">
-<img src="../image/gerenxinyong/btnsousuo.png" alt="æœç´¢" style="height:30px;width:50px;vertical-align:middle;cursor:pointer;" onclick="javascript:formcha.submit();"/>
+ID¿¨ºÅ£º<input type="text" id="kahaocha" name="kahaocha">
+¼Æ·Ö¹æÔò£º <input type="text" id="jifencha" name="jifencha">
+<img src="../image/gerenxinyong/btnsousuo.png" alt="ËÑË÷" style="height:30px;width:50px;vertical-align:middle;cursor:pointer;" onclick="javascript:formcha.submit();"/>
 </div>
 </form>
 
 <iframe src="grpjmain.jsp" id="neirong"  name="neirong"  marginheight="0" marginwidth="0"  scrolling="no" frameborder="0" style="margin-top:13px;margin-left:20px;width:100%;height:900px"> </iframe>
 
 <% }else{
-System.out.println("ä¸å¯ä»¥æ˜¾ç¤ºç•Œé¢ï¼");
-out.println("<b>æ— æŸ¥è¯¢æƒé™</b>");
+System.out.println("²»¿ÉÒÔÏÔÊ¾½çÃæ£¡");
+out.println("<b>ÎŞ²éÑ¯È¨ÏŞ</b>");
 };%>
 </body>
 </html>

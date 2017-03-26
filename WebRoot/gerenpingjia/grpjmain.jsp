@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.sql.*" contentType="text/html; charset=utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 #namess{
@@ -34,9 +39,10 @@ System.out.println("无查询权限！");
 <% /////////////////////////////////////////////分隔线//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////%>
 <%if(quanxian1.equals("人力资源部")){ %>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("UTF-8");
+response.setContentType("text/html;charset=UTF-8");
      //设置每张网页显示三笔记录(每页显示的记录数)
-     int PageSize=30;
+     int PageSize=15;
      
      //设置欲显示的页数(初始页)
      int ShowPage=1;
@@ -50,10 +56,19 @@ System.out.println("无查询权限！");
      Connection conn=null;
      Statement stmt=null;
      ResultSet rs=null;
+     String s1=null,s2=null;
      if(request.getParameter("kahaocha")!=null)
-     session.setAttribute("kahaopjcha", request.getParameter("kahaocha"));
+     {
+    s1=new String(request.getParameter("kahaocha").getBytes("ISO-8859-1"),"gb2312");
+    s1=s1.trim();
+     session.setAttribute("kahaopjcha", s1);
+     };
      if(request.getParameter("jifencha")!=null)
-     session.setAttribute("jifenpjcha", request.getParameter("jifencha"));
+     {
+     s2=new String(request.getParameter("jifencha").getBytes("ISO-8859-1"),"gb2312");
+     s2=s2.trim();
+     session.setAttribute("jifenpjcha", s2);
+     };
      System.out.println("11111111");
 		System.out.println(session.getAttribute("kahaopjcha").toString());
 		System.out.println(session.getAttribute("jifenpjcha").toString());
@@ -70,20 +85,22 @@ System.out.println("无查询权限！");
 		String PWD = "sky123456";
 		conn = DriverManager.getConnection(URL, USER, PWD);
        stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-       String sql="select * from personstandardhe";
-       if((session.getAttribute("kahaopjcha").toString()!=null)&&(session.getAttribute("kahaopjcha").toString()!=""))
+       String sql="select * from personstandardhe "; 
+       if(session.getAttribute("kahaopjcha")==null||session.getAttribute("kahaopjcha").equals(""))
        {
-	       if(session.getAttribute("jifenpjcha").toString()!=null&&session.getAttribute("jifenpjcha").toString()!="")
+           if(session.getAttribute("jifenpjcha")==null||session.getAttribute("jifenpjcha").equals(""))
 	       {
-	       sql=sql+" where persondo Like '%"+session.getAttribute("jifenpjcha").toString().trim()+"%' and personIDcard='"+session.getAttribute("kahaopjcha").toString().trim()+"' and fenshucheck=1";
+	      System.out.println("s2:"+session.getAttribute("jifenpjcha"));
 	    	}else{
-	    	sql=sql+" where personIDcard='"+session.getAttribute("kahaopjcha").toString().trim()+"' and fenshucheck=1";
+	    	 sql=sql+" where persondo Like '%"+session.getAttribute("jifenpjcha")+"%' and fenshucheck=1";
 	    	};
-    	}else if(session.getAttribute("kahaopjcha").toString()==null||session.getAttribute("kahaopjcha").toString()=="")
-    	{
-    		if(session.getAttribute("jifenpjcha").toString()!=null&&session.getAttribute("jifenpjcha").toString()!="")
+    	}else{
+    	 System.out.println("s1:"+session.getAttribute("kahaopjcha"));
+	       if(session.getAttribute("jifenpjcha")==null||session.getAttribute("jifenpjcha").equals(""))
 	       {
-	       sql=sql+" where persondo Like '%"+session.getAttribute("jifenpjcha").toString().trim()+"%' and fenshucheck=1";
+	       sql=sql+" where personIDcard='"+session.getAttribute("kahaopjcha")+"' and fenshucheck=1";
+	    	}else{
+	       sql=sql+" where persondo Like '%"+session.getAttribute("jifenpjcha")+"%' and personIDcard='"+session.getAttribute("kahaopjcha")+"' and fenshucheck=1";
 	    	};
     	};
     	System.out.println(sql);
@@ -130,7 +147,7 @@ if(RowCount>0){  %>
    
    	<table cellspacing="0" cellpadding="0" style="margin-left:0px;margin-top:5px;border:1px solid #CCCCCC;width:98%;">
    	<tr>
-   	<td colspan=4  style="border:1px solid #CCCCCC;font-size:20px;height:28px;"  align="center">
+   	<td colspan=5  style="border:1px solid #CCCCCC;font-size:20px;height:28px;"  align="center">
    	<div style=""><br>行为规范评价</br></div>
    	</td> 
    	</tr> 
@@ -138,6 +155,7 @@ if(RowCount>0){  %>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">用户名</td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">卡号</td>
 	<td style="border:1px solid #CCCCCC;height:20px;width:500px;"  align="center">计分规则</td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">分值</td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">操作</td>
 	</tr>    
     <%
@@ -149,7 +167,18 @@ if(RowCount>0){  %>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personname")%></td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personIDcard")%></td>
 	<td style="border:1px solid #CCCCCC;height:20px;width:500px;"  align="left"><%=rs.getString("persondo") %></td>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><a href="" onClick="return confirm('确认开展计分处理吗？确认，将对此用户此项进行计分');">计分</a></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="left"><%=rs.getString("personfen") %></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">
+	
+	<form style="center" action="Xingweijifen" method="post">
+	<input name="personIDcard" type="hidden" value="<%=rs.getString("personIDcard")%>">
+	<input name="personname" type="hidden" value="<%=rs.getString("personname")%>">
+	<input name="persondo" type="hidden" value="<%=rs.getString("persondo")%>">
+	<input name="personfen" type="hidden" value="<%=rs.getString("personfen")%>">
+	<input name="personfenshu" type="hidden" value="<%=rs.getString("personfenshu")%>">
+	<input type="submit" onClick="return confirm('确认开展计分处理吗？确认，将对此用户此项进行计分');" value="计分">
+	</form>
+	</td>
 	</tr>
      <p>    
      <%
@@ -171,10 +200,10 @@ if(RowCount>0){  %>
        {
       %>
        <td width=150>
-        <a href="grpj.jsp?ToPage=<%=1 %>">第一页</a>
+        <a href="grpjmain.jsp?ToPage=<%=1 %>">第一页</a>
        </td> 
        <td width=150>
-        <a href="grpj.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
+        <a href="grpjmain.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
        </td>
       <% 
        }
@@ -183,10 +212,10 @@ if(RowCount>0){  %>
        {
        %>
         <td width=150>
-         <a href="grpj.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
+         <a href="grpjmain.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
         </td>
         <td width=150>
-         <a href="grpj.jsp?ToPage=<%=PageCount %>">最后一页</a>
+         <a href="grpjmain.jsp?ToPage=<%=PageCount %>">最后一页</a>
         </td>
         <%
          }
@@ -194,7 +223,7 @@ if(RowCount>0){  %>
          </tr>
          <tr>
          <td colspan="4" align="center">
-          <form action="grpj.jsp" method="post" name="form1">
+          <form action="grpjmain.jsp" method="post" name="form1">
            <input type="text" name="ToPage" value="<%=ShowPage %>" style="height:25px;width:40px">页
             <a href="javascript:window.document.form1.submit();">GO</a>
           </form>
@@ -207,10 +236,7 @@ if(RowCount>0){  %>
     {
        window.document.form1.submit();
     };
-
    </script>
-
-
 </center>
 
  <%}else{
@@ -239,7 +265,7 @@ out.println("<center>不存在此记录！</center>");
 <% /////////////////////////////////////////////分隔线//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////%>				
 		<%}			
  %>
-<%String panduan2=session.getAttribute("kahaopjcha").toString().trim();//判断卡号不为空再执行
+<%String panduan2=session.getAttribute("kahaopjcha").toString();//判断卡号不为空再执行
 if(panduan2==""){%>
 <div style="margin-top:3px;margin-left:0px;">请查询相关人员，然后做出评分！</div>
 <%};%>

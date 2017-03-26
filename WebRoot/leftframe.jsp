@@ -60,7 +60,7 @@
 				<img src="image/menu/biButton/sec_ldgl.png" alt="生产节点目标更改" style="height:18px;width:18px;vertical-align:middle;"/>生产节点目标更改</div>
 				<div id='personin' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='yonghudaoru/fileread.jsp'">
 				<img src="image/menu/biButton/office_chuchai.png" alt="用户导入" style="height:18px;width:18px;vertical-align:middle;"/>用户导入</div>
-				<div id='beifenhuifu' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='mainneirong.jsp'">
+				<div id='beifenhuifu' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='systemmanage/beifenhuifu.jsp'">
 				<img src="image/menu/biButton/basket_put.png" alt="备份和恢复" style="height:18px;width:18px;vertical-align:middle;"/>备份和恢复</div>						
 
 
