@@ -32,9 +32,10 @@ public class Xingweijifen extends HttpServlet {
     	String fenstring=request.getParameter("personfen");
     	System.out.println(personname+"//");
     	System.out.println(fenstring+"//");
+    	float xingweibili=(float)0.4;//行为规范所占比例
+    	float koufenxishu=(float)1.0;//扣分系数
     	float personfen=Float.parseFloat(fenstring);
     	float personfenshu=Float.parseFloat(request.getParameter("personfenshu"));
-    	personfenshu=(float) (personfenshu+0.4*personfen);//得到当前的分数
     	int persondocheck=1;//行为规范处理
     	Date persondotime=new Date();
         Calendar cal = Calendar.getInstance();
@@ -47,31 +48,44 @@ public class Xingweijifen extends HttpServlet {
     	System.out.println(hehepersondotime+"看看");
     	System.out.println(personname+"看看");
     	try{
+    		String sql1="select * from persondorecord where personIDcard='"+personIDcard+"' and persondo='"+persondo+"' and persondoyear="+Integer.toString(persondoyear)+" and persondomonth="+Integer.toString(persondomonth);
+    		System.out.println("---"+sql1+"---");
+    		SqlUtils sqlUtils1=new SqlUtils();
+    		Boolean flag1=sqlUtils1.queryjieguo(sql1);
+    		if(flag1)
+    		{
+    			koufenxishu=(float)1.5;
+    		}
+    	}catch(Exception e){
+    		System.out.println("系数提取失败");
+    	};    	
+    	personfenshu=(float) (personfenshu+xingweibili*koufenxishu*personfen);//得到当前的分数    	
+    	try{
 		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?)";
 		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
 		SqlUtils sqlUtils=new SqlUtils();
 		flag=sqlUtils.update(sql, param);
 		System.out.println(param+"////");
 			if(flag){
-				String sql1="update person set personfenshu=? WHERE personIDcard=?";
-				String [] param1={String.valueOf(personfenshu),personIDcard};
-				System.out.println(param1+"////");
-				SqlUtils sqlUtils1=new SqlUtils();
-				boolean flag2=sqlUtils1.update(sql1, param1);
-				if(flag2){
+				//String sql1="update person set personfenshu=? WHERE personIDcard=?";
+				//String [] param1={String.valueOf(personfenshu),personIDcard};
+				//System.out.println(param1+"////");
+				//SqlUtils sqlUtils1=new SqlUtils();
+				//boolean flag2=sqlUtils1.update(sql1, param1);
+				//if(flag2){
 					System.out.println("计分成功");
 					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>现在得分为"+String.valueOf(personfenshu)+"分。");
 				}else{
 					System.out.println("计分未成功");
 					out.println("计分未成功");
-				}
+				//}
 			}
     	}catch(Exception e){
     		System.out.println("计分未操作未成功");
     		out.println("计分未操作未成功");
     	};
     	
-    	//out.close();
+    	out.close();
     }  
   
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
