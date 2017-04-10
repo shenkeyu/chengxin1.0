@@ -113,8 +113,7 @@ public class SqlUtils {
 			}
 		return flag;
 	}
-
-
+	
 	
 	public boolean update(String sql,String [] param ){
 		Connection conn = null;

@@ -107,7 +107,29 @@
   <servlet-mapping>
     <servlet-name>Xingweijifen</servlet-name>
     <url-pattern>/Xingweijifen</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Zhiliangjifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Zhiliangjifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Zhiliangjifen</servlet-name>
+    <url-pattern>/Zhiliangjifen</url-pattern>
   </servlet-mapping>  
+  
+    <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Anquanjifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Anquanjifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Anquanjifen</servlet-name>
+    <url-pattern>/Anquanjifen</url-pattern>
+  </servlet-mapping> 
   
   <context-param>
          <param-name>quartz:config-file</param-name>

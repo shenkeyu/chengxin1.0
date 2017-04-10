@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import zhenhua.sql.SqlUtils;
 
-public class Xingweijifen extends HttpServlet {
+public class Anquanjifen extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
     	response.setHeader("content-type", "text/html;charset=UTF-8");  
     	response.setCharacterEncoding("UTF-8");  
@@ -30,13 +30,13 @@ public class Xingweijifen extends HttpServlet {
     	String personIDcard=request.getParameter("personIDcard");
     	String persondo=request.getParameter("persondo");
     	String fenstring=request.getParameter("personfen");
+    	int erjicheck=Integer.parseInt(request.getParameter("erjicheck"));//安全计分二级计算标识
     	System.out.println(personname+"//");
     	System.out.println(fenstring+"//");
-    	float xingweibili=(float)0.2;//行为规范所占比例
-    	float koufenxishu=(float)1.0;//扣分系数
+    	float anquanbili=(float)0.4;//安全评分所占比例
     	float personfen=Float.parseFloat(fenstring);
     	float personfenshu=Float.parseFloat(request.getParameter("personfenshu"));
-    	int persondocheck=1;//行为规范处理
+    	int persondocheck=3;//安全计分处理
     	Date persondotime=new Date();
         Calendar cal = Calendar.getInstance();
         int persondoyear = cal.get(Calendar.YEAR);//获取年份
@@ -47,45 +47,24 @@ public class Xingweijifen extends HttpServlet {
     	String hehepersondotime = dateFormat.format(persondotime);//转换显示日期格式
     	System.out.println(hehepersondotime+"看看");
     	System.out.println(personname+"看看");
+    	System.out.println(erjicheck+"看看");
     	try{
-    		String sql1="select * from persondorecord where personIDcard='"+personIDcard+"' and persondo='"+persondo+"' and persondoyear="+Integer.toString(persondoyear)+" and persondomonth="+Integer.toString(persondomonth);
-    		System.out.println("---"+sql1+"---");
-    		SqlUtils sqlUtils1=new SqlUtils();
-    		Boolean flag1=sqlUtils1.queryjieguo(sql1);
-    		if(flag1)
-    		{
-    			koufenxishu=(float)1.5;
-    		}
-    	}catch(Exception e){
-    		System.out.println("系数提取失败");
-    	};
-    	personfen=koufenxishu*personfen;//违反两次及以上时扣分放生编号
-    	//personfenshu=(float) (personfenshu+xingweibili*personfen);//得到当前的分数  。临时计算当前分数时  	
-    	try{
-		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?)";
-		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
+		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondoerjicheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?,?)";
+		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),Integer.toString(erjicheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
 		SqlUtils sqlUtils=new SqlUtils();
 		flag=sqlUtils.update(sql, param);
 		System.out.println(sql+"////");
 			if(flag){
-				//String sql1="update person set personfenshu=? WHERE personIDcard=?";
-				//String [] param1={String.valueOf(personfenshu),personIDcard};
-				//System.out.println(param1+"////");
-				//SqlUtils sqlUtils1=new SqlUtils();
-				//boolean flag2=sqlUtils1.update(sql1, param1);
-				//if(flag2){
 					System.out.println("计分成功");
 					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>现在得分为"+String.valueOf(personfenshu)+"分。");
 				}else{
 					System.out.println("计分未成功");
 					out.println("计分未成功");
-				//}
 				}
     	}catch(Exception e){
     		System.out.println("计分未操作未成功");
     		out.println("计分未操作未成功");
-    	};
-    	
+    	};    	
     	out.close();
     }  
   
