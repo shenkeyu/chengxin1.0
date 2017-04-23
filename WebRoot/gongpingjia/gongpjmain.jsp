@@ -152,7 +152,7 @@ if(RowCount>0){  %>
    	</td> 
    	</tr> 
 	<tr>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">外包商名字</td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">供应商名字</td>
 	<td style="border:1px solid #CCCCCC;height:20px;width:500px;"  align="center">计分规则</td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">分值</td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">操作</td>
@@ -168,11 +168,12 @@ if(RowCount>0){  %>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="left"><%=rs.getString("gongfen") %></td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center">
 	
-	<form style="center" action="gongjifen" method="post">
+	<form style="center" action="Gongjifen" method="post">
 	<input name="gongname" type="hidden" value="<%=rs.getString("name")%>">
 	<input name="gongdo" type="hidden" value="<%=rs.getString("gongdo")%>">
 	<input name="gongfen" type="hidden" value="<%=rs.getString("gongfen")%>">
 	<input name="gongfenshu" type="hidden" value="<%=rs.getString("fenshu")%>">
+	<input name="fenshucheck" type="hidden" value="<%=rs.getString("fenshucheck")%>">
 	<input name="erjicheck" type="hidden" value="<%=rs.getString("erjicheck")%>">
 	<input type="submit" onClick="return confirm('确认开展计分处理吗？确认，将对此用户此项进行计分');" value="计分">
 	</form>
@@ -255,7 +256,7 @@ out.println("<center>不存在此记录！</center>");
  %>
 <%String panduan2=session.getAttribute("gongnamepjcha").toString();//判断卡号不为空再执行
 if(panduan2==""){%>
-<div style="margin-top:3px;margin-left:0px;">请查询相关外分包商公司名称，然后做出评分！</div>
+<div style="margin-top:3px;margin-left:0px;">请查询相关供应商公司名称，然后做出评分！</div>
 <%};%>
 </body>
 </html>

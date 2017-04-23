@@ -26,7 +26,7 @@ public class SqlUtils {
 		Connection conn = null;
 Properties props=new Properties();
 try{
-props.load(ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties"));
+props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties"));
 		String jdbcURL = props.getProperty("jdbcURL");//
 		String jdbcDriver = props.getProperty("jdbcDriver");//
 		String username =props.getProperty("username");//

@@ -126,6 +126,9 @@ public class DingqiJobMon implements Job
 	    	        System.out.println(personfenshu+"计分");
 	    			personfenshu=personfenshu+xingweibili*personXWGF+zhiliangbili*personZLXY+anquanbili*personAQXY;	//按比例计算个人分
 	    			System.out.println(personfenshu+"计分");
+	    			personXWGF=120+personXWGF;
+	    			personZLXY=120+personZLXY;
+	    			personAQXY=120+personAQXY;
 	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
 	    	    	try{
 	    	    		String sql2="insert into personMonthScore (personname,personIDcard,personfenshu,personXWGF,personZLXY,personAQXY) values (?,?,?,?,?,?)";
@@ -213,6 +216,9 @@ public class DingqiJobMon implements Job
     	    	        System.out.println("100分计分");
     	    			waifenshu=100+(float)(0.45*waiZLPJ+0.45*waiJHPJ+0.1*waiFWPJ);	//每月100分制时采用，暂时未利用上月的分数值
     	    			System.out.println(waifenshu+"计分");
+    	    	        waiZLPJ=100+rswai.getFloat("waiZLPJ");
+    	    	        waiJHPJ=100+rswai.getFloat("waiJHPJ");
+    	    	        waiFWPJ=100+rswai.getFloat("waiFWPJ");
     	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
     	    	    	try{
     	    	    		String sql2="insert into waiMonthScore (wainame,waifenshu,waiZLPJ,waiJHPJ,waiFWPJ) values (?,?,?,?,?)";
@@ -220,7 +226,7 @@ public class DingqiJobMon implements Job
     	    	    		SqlUtils sqlUtils2=new SqlUtils();
     	    	    		Boolean flag2=sqlUtils2.update(sql2, param);
     	    	    			if(flag2){//更新总表
-    	    	    				String sql3="update wai set fenshu=? WHERE wainame=?";
+    	    	    				String sql3="update wai set fenshu=? WHERE name=?";
     	    	    				String [] param1={String.valueOf(waifenshu),wainame};
     	    	    				SqlUtils sqlUtils3=new SqlUtils();
     	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
@@ -256,20 +262,73 @@ public class DingqiJobMon implements Job
         
         
         //////////供应商/////////////////////////////////////////////////////////////////////////////
-        ////////////行为规范评价////////////////////
-        
-        
-        //////////////////////////////////////
-        ///////////质量诚信评价///////////////////
-        
-        
-        ////////////////////////////////////
-        ///////////安全诚信评价/////////////////
-        
-        /////////////////////////////////////
-        ///////////////月度最终处理//////////////
-        
-        ////////////////////////////////////
+                ///////////////月度最终处理//////////////
+        		Connection conngong = null;
+        	    Statement stmtgong=null;
+        	    ResultSet rsgong=null;
+            	    try {
+                	String sqlgong="select * from gongMonview";//查看月度求和view
+                	SqlUtils sqlUtilsgong=new SqlUtils();
+                	conngong = sqlUtilsgong.getConnection();
+            		stmtgong= conngong.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
+            		rsgong=stmtgong.executeQuery(sqlgong);
+            		
+        	    		while(rsgong.next())
+        	    		{
+        	    			float gongfenshu=0;
+        	    			String gongname=rsgong.getString("name");
+        	    	        gongfenshu=rsgong.getFloat("fenshu");//上月的分数值
+        	    	        float gongPZ,gongJQ,gongJG,gongFW,gongQT=0;
+        	    	        gongPZ=rsgong.getFloat("gongPZ");
+        	    	        gongJQ=rsgong.getFloat("gongJQ");
+        	    	        gongJG=rsgong.getFloat("gongJG");
+        	    	        gongFW=rsgong.getFloat("gongFW");
+        	    	        gongQT=rsgong.getFloat("gongQT");        	    	     
+        	    	        /////////////////////////////////////
+        	    	        /////////////////////////////////////
+        	    	        //System.out.println(gongfenshu+"计分");
+        	    	        System.out.println("100分计分");
+        	    			gongfenshu=100+(float)(0.3*gongPZ+0.25*gongJQ+0.25*gongJG+0.15*gongFW+0.05*gongQT);	//每月100分制时采用，暂时未利用上月的分数值
+        	    			System.out.println(gongfenshu+"计分");
+        	    	        gongPZ=100+rsgong.getFloat("gongPZ");
+        	    	        gongJQ=100+rsgong.getFloat("gongJQ");
+        	    	        gongJG=100+rsgong.getFloat("gongJG");
+        	    	        gongFW=100+rsgong.getFloat("gongFW");
+        	    	        gongQT=100+rsgong.getFloat("gongQT"); 
+        	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
+        	    	    	try{
+        	    	    		String sql2="insert into gongMonthScore (gongname,gongfenshu,gongPZ,gongJQ,gongJG,gongFW,gongQT) values (?,?,?,?,?,?,?)";
+        	    	    		String [] param={gongname,String.valueOf(gongfenshu),String.valueOf(gongPZ),String.valueOf(gongJQ),String.valueOf(gongJG),String.valueOf(gongFW),String.valueOf(gongQT)};
+        	    	    		SqlUtils sqlUtils2=new SqlUtils();
+        	    	    		Boolean flag2=sqlUtils2.update(sql2, param);
+        	    	    			if(flag2){//更新总表
+        	    	    				String sql3="update gong set fenshu=? WHERE name=?";
+        	    	    				String [] param1={String.valueOf(gongfenshu),gongname};
+        	    	    				SqlUtils sqlUtils3=new SqlUtils();
+        	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
+        	    	    					if(flag3){
+        	    	    					System.out.println(gongname+"月度计分成功");
+        	    	    					}else{
+        	    	    					System.out.println(gongname+"月度计分未成功");
+        	    	    					}
+        	    	    				}
+        	    	        	}catch(Exception e){
+        	    	        		System.out.println(gongname+"月度计分未操作未成功");
+        	    	        	}; 
+        	    	        ////////////////////////////////////////////////////////////////////////////
+        	    		}
+            		}catch (SQLException e){
+            			e.printStackTrace();
+            		}finally{
+            			try {
+            				rsgong.close();
+            				stmtgong.close();
+            				conngong.close();
+            				}catch (SQLException e) {
+            				e.printStackTrace();
+            				};
+            		}   
+                ////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
         
         System.out.println("每月执行的任务结束了！"); 

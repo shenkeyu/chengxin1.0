@@ -176,7 +176,7 @@ if(RowCount>0){  %>
 	<input name="persondo" type="hidden" value="<%=rs.getString("persondo")%>">
 	<input name="personfen" type="hidden" value="<%=rs.getString("personfen")%>">
 	<input name="personfenshu" type="hidden" value="<%=rs.getString("personfenshu")%>">
-	<input name="erjicheck" type="hidden" value="<%=rs.getString("erjicheck")%>">
+	<input name="fenshucheck" type="hidden" value="<%=rs.getString("fenshucheck")%>">
 	<input type="submit" onClick="return confirm('确认开展计分处理吗？确认，将对此用户此项进行计分');" value="计分">
 	</form>
 	</td>

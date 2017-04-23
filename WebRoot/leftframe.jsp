@@ -54,10 +54,6 @@
 				<img src="image/menu/biButton/office_huiyishi.png" alt="统计分析" style="height:18px;width:18px;vertical-align:middle;"/>统计分析</div>
 					
 				<div id='xitongguanli'><img src="image/menu/biButton/process_on.png" alt="系统管理" style="height:18px;width:18px;vertical-align:middle;"/>系统管理</div>
-				<div id='zhiliangmubiao' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='mainneirong.jsp'">
-				<img src="image/menu/biButton/default.png" alt="质量目标更改" style="height:18px;width:18px;vertical-align:middle;"/>质量目标更改</div>
-				<div id='shengchanjiedian' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='mainneirong.jsp'">
-				<img src="image/menu/biButton/sec_ldgl.png" alt="生产节点目标更改" style="height:18px;width:18px;vertical-align:middle;"/>生产节点目标更改</div>
 				<div id='personin' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='yonghudaoru/fileread.jsp'">
 				<img src="image/menu/biButton/office_chuchai.png" alt="用户导入" style="height:18px;width:18px;vertical-align:middle;"/>用户导入</div>
 				<div id='beifenhuifu' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='systemmanage/beifenhuifu.jsp'">

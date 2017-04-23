@@ -128,6 +128,19 @@
   </servlet-mapping> 
   
   
+        <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Gongjifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Gongjifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Gongjifen</servlet-name>
+    <url-pattern>/Gongjifen</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <context-param>
          <param-name>quartz:config-file</param-name>
          <param-value>/quartz.properties</param-value>

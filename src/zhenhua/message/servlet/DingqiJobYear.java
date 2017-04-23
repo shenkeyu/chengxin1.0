@@ -16,6 +16,7 @@ import org.quartz.JobExecutionException;
 
 
 
+
 import zhenhua.sql.SqlUtils;
 
 public class DingqiJobYear implements Job
@@ -116,6 +117,9 @@ public class DingqiJobYear implements Job
 	    	        System.out.println(personfenshu+"计分");
 	    			personfenshu=personfenshu+xingweibili*personXWGF+zhiliangbili*personZLXY+anquanbili*personAQXY;	//按比例计算个人分
 	    			System.out.println(personfenshu+"计分");
+	    			personXWGF=120+personXWGF;
+	    			personZLXY=120+personZLXY;
+	    			personAQXY=120+personAQXY;
 	    			/////////////////////////////写入年度表，更新总表中个人的分数//////////////////////////////////////
 	    	    	try{
 	    	    		String sql2="insert into personYearScore (personname,personIDcard,personfenshu,personXWGF,personZLXY,personAQXY) values (?,?,?,?,?,?)";
@@ -211,7 +215,7 @@ public class DingqiJobYear implements Job
     	    	    		SqlUtils sqlUtils2=new SqlUtils();
     	    	    		Boolean flag2=sqlUtils2.update(sql2, param);
     	    	    			if(flag2){//更新总表
-    	    	    				String sql3="update wai set fenshu=? WHERE wainame=?";
+    	    	    				String sql3="update wai set fenshu=? WHERE name=?";
     	    	    				String [] param1={String.valueOf(waifenshu),wainame};
     	    	    				SqlUtils sqlUtils3=new SqlUtils();
     	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
@@ -247,20 +251,68 @@ public class DingqiJobYear implements Job
         
         
         //////////供应商/////////////////////////////////////////////////////////////////////////////
-        ////////////行为规范评价////////////////////
-        
-        
-        //////////////////////////////////////
-        ///////////质量诚信评价///////////////////
-        
-        
-        ////////////////////////////////////
-        ///////////安全诚信评价/////////////////
-        
-        /////////////////////////////////////
-        ///////////////月度最终处理//////////////
-        
-        ////////////////////////////////////
+                ///////////////年度最终处理//////////////
+        		Connection conngong = null;
+        	    Statement stmtgong=null;
+        	    ResultSet rsgong=null;
+            	    try {
+                	String sqlgong="select * from gongYearview";//查看年 度求和view
+                	SqlUtils sqlUtilsgong=new SqlUtils();
+                	conngong = sqlUtilsgong.getConnection();
+            		stmtgong= conngong.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
+            		rsgong=stmtgong.executeQuery(sqlgong);
+            		
+        	    		while(rsgong.next())
+        	    		{
+        	    			float gongfenshu=0;
+        	    			String gongname=rsgong.getString("gongname");
+        	    	        gongfenshu=rsgong.getFloat("gongfenshu")/12;//取12个月的平均分
+        	    	        float gongPZ,gongJQ,gongJG,gongFW,gongQT=0;
+        	    	        gongPZ=rsgong.getFloat("gongPZ")/12;
+        	    	        gongJQ=rsgong.getFloat("gongJQ")/12;
+        	    	        gongJG=rsgong.getFloat("gongJG")/12;
+        	    	        gongFW=rsgong.getFloat("gongFW")/12;
+        	    	        gongQT=rsgong.getFloat("gongQT")/12; 
+        	    	        /////////////////////////////////////
+        	    	        /////////////////////////////////////
+        	    	        //System.out.println(gongfenshu+"计分");
+        	    	        System.out.println("100分计分");
+        	    			//gongfenshu=100+(float)(0.45*gongZLPJ+0.45*gongJHPJ+0.1*gongFWPJ);	//每月100分制时采用，暂时未利用上月的分数值
+        	    			System.out.println(gongfenshu+"计分");
+        	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
+        	    	    	try{
+        	    	    		String sql2="insert into gongYearScore (gongname,gongfenshu,gongPZ,gongJQ,gongJG,gongFW,gongQT) values (?,?,?,?,?,?,?)";
+        	    	    		String [] param={gongname,String.valueOf(gongfenshu),String.valueOf(gongPZ),String.valueOf(gongJQ),String.valueOf(gongJG),String.valueOf(gongFW),String.valueOf(gongQT)};
+        	    	    		SqlUtils sqlUtils2=new SqlUtils();
+        	    	    		Boolean flag2=sqlUtils2.update(sql2, param);
+        	    	    			if(flag2){//更新总表
+        	    	    				String sql3="update gong set fenshu=? WHERE name=?";
+        	    	    				String [] param1={String.valueOf(gongfenshu),gongname};
+        	    	    				SqlUtils sqlUtils3=new SqlUtils();
+        	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
+        	    	    					if(flag3){
+        	    	    					System.out.println(gongname+"年度计分成功");
+        	    	    					}else{
+        	    	    					System.out.println(gongname+"年度计分未成功");
+        	    	    					}
+        	    	    				}
+        	    	        	}catch(Exception e){
+        	    	        		System.out.println(gongname+"年度计分未操作未成功");
+        	    	        	}; 
+        	    	        ////////////////////////////////////////////////////////////////////////////
+        	    		}
+            		}catch (SQLException e){
+            			e.printStackTrace();
+            		}finally{
+            			try {
+            				rsgong.close();
+            				stmtgong.close();
+            				conngong.close();
+            				}catch (SQLException e) {
+            				e.printStackTrace();
+            				};
+            		}   
+                ////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
         
         System.out.println("每年执行的任务结束了！");   
