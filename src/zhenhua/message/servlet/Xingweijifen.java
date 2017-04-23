@@ -30,6 +30,7 @@ public class Xingweijifen extends HttpServlet {
     	String personIDcard=request.getParameter("personIDcard");
     	String persondo=request.getParameter("persondo");
     	String fenstring=request.getParameter("personfen");
+    	int erjicheck=Integer.parseInt(request.getParameter("erjicheck"));//行为计分二级计算标识
     	System.out.println(personname+"//");
     	System.out.println(fenstring+"//");
     	float xingweibili=(float)0.2;//行为规范所占比例
@@ -62,8 +63,8 @@ public class Xingweijifen extends HttpServlet {
     	personfen=koufenxishu*personfen;//违反两次及以上时扣分放生编号
     	//personfenshu=(float) (personfenshu+xingweibili*personfen);//得到当前的分数  。临时计算当前分数时  	
     	try{
-		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?)";
-		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
+		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondoerjicheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?)";
+		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),Integer.toString(erjicheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
 		SqlUtils sqlUtils=new SqlUtils();
 		flag=sqlUtils.update(sql, param);
 		System.out.println(sql+"////");
@@ -75,7 +76,7 @@ public class Xingweijifen extends HttpServlet {
 				//boolean flag2=sqlUtils1.update(sql1, param1);
 				//if(flag2){
 					System.out.println("计分成功");
-					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>现在得分为"+String.valueOf(personfenshu)+"分。");
+					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>上月得分为"+String.valueOf(personfenshu)+"分。");
 				}else{
 					System.out.println("计分未成功");
 					out.println("计分未成功");

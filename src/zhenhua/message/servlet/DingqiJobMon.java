@@ -82,11 +82,46 @@ public class DingqiJobMon implements Job
 	    	        ////////////////////////////////////
 	    	        ///////////安全诚信评价/////////////////
 	    	      /////安全信用综合分数=安全承诺分数*0.2+不良信用记录分数*0.4+黑名单*0.4+其他奖励加分（0-10）分
-	    	        //此处特别需要注意加分上限为10分，所以月度分，不是涵盖了所有计分动作；年度计分，也不是简单的把所有计分动作求和
+	    	        //此处特别需要注意加分上限为10分，所以月度分，不是涵盖了所有计分动作；年度计分，也不是简单的把所有计分动作求和;已经平移到日常计分中去计算，此处不再考虑
 	    	        /////////安全诚信等级为甲级，基准分为100分/////
-	    	        
+    	        	try{
+    	        		String sql="select * from persondengji where personIDcard='"+personIDcard;
+    	        		SqlUtils sqlUtils=new SqlUtils();
+    	        		Connection conn1 = null;
+    	        	    Statement stmt1=null;
+    	        	    ResultSet rs1=null;
+    	            	conn1 = sqlUtils.getConnection();
+    	        		stmt1= conn1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
+    	        		rs1=stmt1.executeQuery(sql);
+    	        		String persondengji=rs1.getString("persondengji");
+    	        		if(persondengji=="甲级")
+    	        		{
+	    	        		System.out.println(personIDcard+"此人为甲级，基准分不变");	
+	    	        	}else if(persondengji=="乙级"){
+    	        			System.out.println(personIDcard+"此人为乙级，基准分-10分");	
+    	        			personAQXY=personAQXY-(float)(10*0.4);
+    	        		}else if(persondengji=="丙级"){
+    	        			System.out.println(personIDcard+"此人为丙级，基准分-20分");
+    	        			personAQXY=personAQXY-(float)(20*0.4);
+    	        		}
+    	        	}catch(Exception e){
+    	        		System.out.println(personIDcard+"等级判断失败");
+    	        	}; 
 	    	        //////在黑名单内基准分为80分，否则为100分///////
-	    	        
+    	        	try{
+    	        		String sql="select * from personheimingdan where personIDcard='"+personIDcard;
+    	        		SqlUtils sqlUtils=new SqlUtils();
+    	        		Boolean flag1=sqlUtils.queryjieguo(sql);
+    	        		if(flag1)
+    	        		{
+	    	        		System.out.println(personIDcard+"此人在黑名单中，-20分");	
+	    	        		personAQXY=personAQXY-(float)(20*0.4);
+    	        		}else{
+    	        			System.out.println(personIDcard+"此人不在黑名单中，分数不变");		    	        			
+    	        		}
+    	        	}catch(Exception e){
+    	        		System.out.println(personIDcard+"黑名单判断失败");
+    	        	}; 	    	        
 	    	        /////////////////////////////////////
 	    	        System.out.println(personfenshu+"计分");
 	    			personfenshu=personfenshu+xingweibili*personXWGF+zhiliangbili*personZLXY+anquanbili*personAQXY;	//按比例计算个人分
@@ -103,13 +138,13 @@ public class DingqiJobMon implements Job
 	    	    				SqlUtils sqlUtils3=new SqlUtils();
 	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
 	    	    					if(flag3){
-	    	    					System.out.println(personIDcard+"计分成功");
+	    	    					System.out.println(personIDcard+"月度计分成功");
 	    	    					}else{
-	    	    					System.out.println(personIDcard+"计分未成功");
+	    	    					System.out.println(personIDcard+"月度计分未成功");
 	    	    					}
 	    	    				}
 	    	        	}catch(Exception e){
-	    	        		System.out.println(personIDcard+"计分未操作未成功");
+	    	        		System.out.println(personIDcard+"月度计分未操作未成功");
 	    	        	}; 
 	    	        ////////////////////////////////////////////////////////////////////////////
 	    		}
@@ -152,20 +187,66 @@ public class DingqiJobMon implements Job
         
         
         ///////////外分包商/////////////////////////////////////////////////////////////////////////////
-        ////////////行为规范评价////////////////////
-        
-        
-        //////////////////////////////////////
-        ///////////质量诚信评价///////////////////
-        
-        
-        ////////////////////////////////////
-        ///////////安全诚信评价/////////////////
-        
-        /////////////////////////////////////
-        ///////////////月度最终处理//////////////
-        
-        ////////////////////////////////////
+            ///////////////月度最终处理//////////////
+    		Connection connwai = null;
+    	    Statement stmtwai=null;
+    	    ResultSet rswai=null;
+        	    try {
+            	String sqlwai="select * from waiMonview";//查看月度求和view
+            	SqlUtils sqlUtilswai=new SqlUtils();
+            	connwai = sqlUtilswai.getConnection();
+        		stmtwai= connwai.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
+        		rswai=stmtwai.executeQuery(sqlwai);
+        		
+    	    		while(rswai.next())
+    	    		{
+    	    			float waifenshu=0;
+    	    			String wainame=rswai.getString("name");
+    	    	        waifenshu=rswai.getFloat("fenshu");//上月的分数值
+    	    	        float waiZLPJ,waiJHPJ,waiFWPJ=0;
+    	    	        waiZLPJ=rswai.getFloat("waizhiliangfen");
+    	    	        waiJHPJ=rswai.getFloat("waijiaohuoqifen");
+    	    	        waiFWPJ=rswai.getFloat("waifuwufen");
+    	    	        /////////////////////////////////////
+    	    	        /////////////////////////////////////
+    	    	        //System.out.println(waifenshu+"计分");
+    	    	        System.out.println("100分计分");
+    	    			waifenshu=100+(float)(0.45*waiZLPJ+0.45*waiJHPJ+0.1*waiFWPJ);	//每月100分制时采用，暂时未利用上月的分数值
+    	    			System.out.println(waifenshu+"计分");
+    	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
+    	    	    	try{
+    	    	    		String sql2="insert into waiMonthScore (wainame,waifenshu,waiZLPJ,waiJHPJ,waiFWPJ) values (?,?,?,?,?)";
+    	    	    		String [] param={wainame,String.valueOf(waifenshu),String.valueOf(waiZLPJ),String.valueOf(waiJHPJ),String.valueOf(waiFWPJ)};
+    	    	    		SqlUtils sqlUtils2=new SqlUtils();
+    	    	    		Boolean flag2=sqlUtils2.update(sql2, param);
+    	    	    			if(flag2){//更新总表
+    	    	    				String sql3="update wai set fenshu=? WHERE wainame=?";
+    	    	    				String [] param1={String.valueOf(waifenshu),wainame};
+    	    	    				SqlUtils sqlUtils3=new SqlUtils();
+    	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
+    	    	    					if(flag3){
+    	    	    					System.out.println(wainame+"月度计分成功");
+    	    	    					}else{
+    	    	    					System.out.println(wainame+"月度计分未成功");
+    	    	    					}
+    	    	    				}
+    	    	        	}catch(Exception e){
+    	    	        		System.out.println(wainame+"月度计分未操作未成功");
+    	    	        	}; 
+    	    	        ////////////////////////////////////////////////////////////////////////////
+    	    		}
+        		}catch (SQLException e){
+        			e.printStackTrace();
+        		}finally{
+        			try {
+        				rswai.close();
+        				stmtwai.close();
+        				connwai.close();
+        				}catch (SQLException e) {
+        				e.printStackTrace();
+        				};
+        		}   
+            ////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
         
         

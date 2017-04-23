@@ -5,22 +5,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-
-    <context-param>
-    <param-name>sqlservername</param-name>
-    <param-value>zhenhua</param-value>
-    </context-param>
-    <context-param>
-    <param-name>sqlserveryonghu</param-name>
-    <param-value>sa</param-value>
-    </context-param>
-    <context-param>
-    <param-name>sqlservermima</param-name>
-    <param-value>sky123456</param-value>
-    </context-param>
-
-
-  <servlet>
+ <servlet>
     <description>This is the description of my J2EE component shenkeyu</description>
     <display-name>This is the display name of my J2EE component shenkeyu</display-name>
     <servlet-name>readfile</servlet-name>
@@ -130,6 +115,18 @@
     <servlet-name>Anquanjifen</servlet-name>
     <url-pattern>/Anquanjifen</url-pattern>
   </servlet-mapping> 
+  
+      <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Waijifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Waijifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Waijifen</servlet-name>
+    <url-pattern>/Waijifen</url-pattern>
+  </servlet-mapping> 
+  
   
   <context-param>
          <param-name>quartz:config-file</param-name>

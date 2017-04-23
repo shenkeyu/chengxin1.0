@@ -80,9 +80,9 @@ response.setContentType("text/html;charset=UTF-8");
      //连接数据库并初始数据
       try{
        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		conn = DriverManager.getConnection(URL, USER, PWD);
        stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
        String sql="select * from personstandardhe "; 
@@ -176,6 +176,7 @@ if(RowCount>0){  %>
 	<input name="persondo" type="hidden" value="<%=rs.getString("persondo")%>">
 	<input name="personfen" type="hidden" value="<%=rs.getString("personfen")%>">
 	<input name="personfenshu" type="hidden" value="<%=rs.getString("personfenshu")%>">
+	<input name="erjicheck" type="hidden" value="<%=rs.getString("erjicheck")%>">
 	<input type="submit" onClick="return confirm('确认开展计分处理吗？确认，将对此用户此项进行计分');" value="计分">
 	</form>
 	</td>
@@ -200,10 +201,10 @@ if(RowCount>0){  %>
        {
       %>
        <td width=150>
-        <a href="grpjmain.jsp?ToPage=<%=1 %>">第一页</a>
+        <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=1 %>">第一页</a>
        </td> 
        <td width=150>
-        <a href="grpjmain.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
+        <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
        </td>
       <% 
        }
@@ -212,10 +213,10 @@ if(RowCount>0){  %>
        {
        %>
         <td width=150>
-         <a href="grpjmain.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
+         <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
         </td>
         <td width=150>
-         <a href="grpjmain.jsp?ToPage=<%=PageCount %>">最后一页</a>
+         <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=PageCount %>">最后一页</a>
         </td>
         <%
          }
@@ -223,7 +224,7 @@ if(RowCount>0){  %>
          </tr>
          <tr>
          <td colspan="4" align="center">
-          <form action="grpjmain.jsp" method="post" name="form1">
+          <form action="gerenpingjia/grpjmain.jsp" method="post" name="form1">
            <input type="text" name="ToPage" value="<%=ShowPage %>" style="height:25px;width:40px">页
             <a href="javascript:window.document.form1.submit();">GO</a>
           </form>
@@ -298,9 +299,9 @@ response.setContentType("text/html;charset=UTF-8");
      //连接数据库并初始数据
       try{
        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		conn = DriverManager.getConnection(URL, USER, PWD);
        stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
        String sql="select * from personstandardhe"; 
@@ -428,6 +429,7 @@ if(RowCount>0){  %>
 	</script>
 	<input name="personfen" type="hidden">
 	<input name="personfenshu" type="hidden" value="<%=rs.getString("personfenshu")%>">
+	<input name="erjicheck" type="hidden" value="1">
 	<input type="submit" onClick="return jisuan();" value="计分">
 	</form>
 	</td>
@@ -449,6 +451,7 @@ if(RowCount>0){  %>
 	<input name="persondo" type="hidden" value="<%=rs.getString("persondo")%>">
 	<input name="personfen" type="hidden" value="<%=rs.getString("personfen")%>">
 	<input name="personfenshu" type="hidden" value="<%=rs.getString("personfenshu")%>">
+	<input name="erjicheck" type="hidden" value="<%=rs.getString("erjicheck")%>">
 	<input type="submit" onClick="return confirm('确认开展计分处理吗？确认，将对此用户此项进行计分');" value="计分">
 	</form>
 	</td>
@@ -473,10 +476,10 @@ if(RowCount>0){  %>
        {
       %>
        <td width=150>
-        <a href="grpjmain.jsp?ToPage=<%=1 %>">第一页</a>
+        <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=1 %>">第一页</a>
        </td> 
        <td width=150>
-        <a href="grpjmain.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
+        <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
        </td>
       <% 
        }
@@ -485,10 +488,10 @@ if(RowCount>0){  %>
        {
        %>
         <td width=150>
-         <a href="grpjmain.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
+         <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
         </td>
         <td width=150>
-         <a href="grpjmain.jsp?ToPage=<%=PageCount %>">最后一页</a>
+         <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=PageCount %>">最后一页</a>
         </td>
         <%
          }
@@ -496,7 +499,7 @@ if(RowCount>0){  %>
          </tr>
          <tr>
          <td colspan="4" align="center">
-          <form action="grpjmain.jsp" method="post" name="form2">
+          <form action="gerenpingjia/grpjmain.jsp" method="post" name="form2">
            <input type="text" name="ToPage" value="<%=ShowPage %>" style="height:25px;width:40px">页
             <a href="javascript:window.document.form1.submit();">GO</a>
           </form>
@@ -571,9 +574,9 @@ response.setContentType("text/html;charset=UTF-8");
      //连接数据库并初始数据
       try{
        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		conn = DriverManager.getConnection(URL, USER, PWD);
        stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
        String sql="select * from personstandardhe "; 
@@ -692,10 +695,10 @@ if(RowCount>0){  %>
        {
       %>
        <td width=150>
-        <a href="grpjmain.jsp?ToPage=<%=1 %>">第一页</a>
+        <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=1 %>">第一页</a>
        </td> 
        <td width=150>
-        <a href="grpjmain.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
+        <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=ShowPage-1 %>">上一页</a>
        </td>
       <% 
        }
@@ -704,10 +707,10 @@ if(RowCount>0){  %>
        {
        %>
         <td width=150>
-         <a href="grpjmain.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
+         <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=ShowPage+1 %>">下一页</a>
         </td>
         <td width=150>
-         <a href="grpjmain.jsp?ToPage=<%=PageCount %>">最后一页</a>
+         <a href="gerenpingjia/grpjmain.jsp?ToPage=<%=PageCount %>">最后一页</a>
         </td>
         <%
          }
@@ -715,7 +718,7 @@ if(RowCount>0){  %>
          </tr>
          <tr>
          <td colspan="4" align="center">
-          <form action="grpjmain.jsp" method="post" name="form3">
+          <form action="gerenpingjia/grpjmain.jsp" method="post" name="form3">
            <input type="text" name="ToPage" value="<%=ShowPage %>" style="height:25px;width:40px">页
             <a href="javascript:window.document.form1.submit();">GO</a>
           </form>

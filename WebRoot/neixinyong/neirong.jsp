@@ -55,9 +55,9 @@ response.setContentType("text/html;charset=UTF-8");
 	};
  try{
 	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		con3 = DriverManager.getConnection(URL, USER, PWD);
 		System.out.println(session.getAttribute("chaxunyonghu").toString());
 		stmt3= con3.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);

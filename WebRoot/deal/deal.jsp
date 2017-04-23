@@ -1,16 +1,22 @@
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.*,java.util.Properties"%>
 <%
 	boolean flag = false;
 	request.setCharacterEncoding("utf-8");
 	String username = request.getParameter("name");
 	String pwd = request.getParameter("password");
 	Connection con = null;
-	session.setAttribute("ssURL","zhenhua");	
-	session.setAttribute("ssYONGHU", "sa");	
-	session.setAttribute("ssMIMA","sky123456");	
 	try {
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
+	Properties pt = new Properties();
+pt.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties"));	
+		String jdbcurldb=pt.getProperty("jdbcurldb");
+		String ssYONGHU=pt.getProperty("username");
+		String ssMIMA=pt.getProperty("password");
+		String jdbcdriver=pt.getProperty("jdbcDriver");
+		Class.forName(jdbcdriver);//加载JDBC驱动器类
+	session.setAttribute("ssURL",jdbcurldb);	
+	session.setAttribute("ssYONGHU", ssYONGHU);	
+	session.setAttribute("ssMIMA",ssMIMA);		
 		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
 		String USER = session.getAttribute("ssYONGHU").toString();
 		String PWD = session.getAttribute("ssMIMA").toString();

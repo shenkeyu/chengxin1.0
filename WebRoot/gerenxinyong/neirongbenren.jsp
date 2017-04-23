@@ -37,9 +37,9 @@ out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
  request.setCharacterEncoding("utf-8");
 	Connection con3 = null;
  		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		con3 = DriverManager.getConnection(URL, USER, PWD);
 		Statement stmt3= con3.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			      String sql3="select * from person where personIDcard ='"+session.getAttribute("IDCard").toString().trim()+"'";    

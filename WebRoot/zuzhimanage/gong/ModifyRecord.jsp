@@ -136,9 +136,9 @@ if(personIDcard!=null&&personIDcard!="")
 	try {
 		Connection con = null;
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		con = DriverManager.getConnection(URL, USER, PWD);
 		Statement stmt= con.createStatement();
 			String sql ="select * from gong where id="+personIDcard.trim();		

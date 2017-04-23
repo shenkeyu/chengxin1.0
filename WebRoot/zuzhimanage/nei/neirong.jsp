@@ -35,9 +35,9 @@ System.out.println(session.getAttribute("neiming").toString());
      //连接数据库并初始数据
       try{
        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		conn = DriverManager.getConnection(URL, USER, PWD);
        stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
        String sql="select * from nei";

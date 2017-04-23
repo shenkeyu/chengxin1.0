@@ -45,9 +45,9 @@
 				<img src="image/menu/biButton/gys.png" alt="个人评价" style="height:18px;width:18px;vertical-align:middle;"/>个人评价</div>
 				<div id='nfbspj'  style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='neipingjia/neipj.jsp'">
 				<img src="image/menu/biButton/gys.png" alt="内分包商评价" style="height:18px;width:18px;vertical-align:middle;"/>内分包商评价</div>
-				<div id='wfbspj' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='neipingjia/neipj.jsp'">
+				<div id='wfbspj' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='waipingjia/waipj.jsp'">
 				<img src="image/menu/biButton/gys.png" alt="外分包商评价" style="height:18px;width:18px;vertical-align:middle;"/>外分包商评价</div>
-				<div id='gyspj' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='neipingjia/neipj.jsp'">
+				<div id='gyspj' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='gongpingjia/gongpj.jsp'">
 				<img src="image/menu/biButton/gys.png" alt="供应商评价" style="height:18px;width:18px;vertical-align:middle;"/>供应商评价</div>
 				
 				<div id='tongjifenxi' style="cursor:pointer" onclick="javascript:window.parent.document.getElementById('frameright').contentWindow.location.href='tongji/tongjizong.jsp'">

@@ -20,55 +20,42 @@ import javax.servlet.http.HttpServletResponse;
 
 import zhenhua.sql.SqlUtils;
 
-public class Anquanjifen extends HttpServlet {
+public class Waijifen extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
     	response.setHeader("content-type", "text/html;charset=UTF-8");  
     	response.setCharacterEncoding("UTF-8");  
     	request.setCharacterEncoding("UTF-8"); 
         PrintWriter out = response.getWriter(); 
-    	String personname=request.getParameter("personname");
-    	String personIDcard=request.getParameter("personIDcard");
-    	String persondo=request.getParameter("persondo");
-    	String fenstring=request.getParameter("personfen");
+    	String wainame=request.getParameter("wainame");
+    	String waido=request.getParameter("waido");
+    	String fenstring=request.getParameter("waifen");
     	int erjicheck=Integer.parseInt(request.getParameter("erjicheck"));//安全计分二级计算标识
-    	System.out.println(personname+"//");
+    	System.out.println(wainame+"//");
     	System.out.println(fenstring+"//");
-    	float anquanbili=(float)0.4;//安全评分所占比例
-    	float personfen=Float.parseFloat(fenstring);
-    	float personfenshu=Float.parseFloat(request.getParameter("personfenshu"));
-    	int persondocheck=3;//安全计分处理
-    	Date persondotime=new Date();
+    	float huansuanbili=(float)1.2;//外分包商计分按100分制计算
+    	float waifen=Float.parseFloat(fenstring);
+    	float waifenshu=Float.parseFloat(request.getParameter("waifenshu"));
+    	Date waidotime=new Date();
         Calendar cal = Calendar.getInstance();
-        int persondoyear = cal.get(Calendar.YEAR);//获取年份
-        int persondomonth=cal.get(Calendar.MONTH)+1;//获取月份
-        int persondoday=cal.get(Calendar.DATE);//获取日
+        int waidoyear = cal.get(Calendar.YEAR);//获取年份
+        int waidomonth=cal.get(Calendar.MONTH)+1;//获取月份
+        int waidoday=cal.get(Calendar.DATE);//获取日
         boolean flag=false;
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//可以方便地修改日期格式
-    	String hehepersondotime = dateFormat.format(persondotime);//转换显示日期格式
-    	System.out.println(hehepersondotime+"看看");
-    	System.out.println(personname+"看看");
+    	String hehewaidotime = dateFormat.format(waidotime);//转换显示日期格式
+    	System.out.println(hehewaidotime+"看看");
+    	System.out.println(wainame+"看看");
     	System.out.println(erjicheck+"看看");
-    	float erjixishu=(float)0.4;//二级乘以的系数
-    	if(erjicheck==1){
-    		erjixishu=(float)0.2;
-    	}else if(erjicheck==2){
-    		erjixishu=(float)0.4;
-    	}else if(erjicheck==3){
-    		erjixishu=(float)0.4;
-    	}else if(erjicheck==4){
-    		erjixishu=(float)1.0;
-    	}
-    	/////////在此判断其他奖励加分不超过10分，最合适，求和后判断//////////
     	/////////////////////////////////////////////////////
     	try{
-		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondoerjicheck,persondoerjixishu,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?,?,?)";
-		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),Integer.toString(erjicheck),Float.toString(erjixishu),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
+		String sql="insert into waidorecord (wainame,waido,waifen,waidoerjicheck,waidotime,waidoyear,waidomonth,waidoday) values (?,?,?,?,?,?,?,?)";
+		String [] param={wainame,waido, String.valueOf(waifen),Integer.toString(erjicheck),hehewaidotime, Integer.toString(waidoyear), Integer.toString(waidomonth), Integer.toString(waidoday)};
 		SqlUtils sqlUtils=new SqlUtils();
 		flag=sqlUtils.update(sql, param);
 		System.out.println(sql+"////");
 			if(flag){
 					System.out.println("计分成功");
-					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>上月得分为"+String.valueOf(personfenshu)+"分。");
+					out.println("计分成功!<br>"+wainame+"<br>因为"+waido+"<br>计"+String.valueOf(waifen)+"分<br>上月得分为"+String.valueOf(waifenshu)+"分。");
 				}else{
 					System.out.println("计分未成功");
 					out.println("计分未成功");

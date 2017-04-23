@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Properties;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -17,15 +18,19 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.BaseResultSetHandler;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.tomcat.dbcp.dbcp.ConnectionFactory;
 
 public class SqlUtils {
 
 	public Connection getConnection() {
 		Connection conn = null;
-		String jdbcURL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";
-		String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-		String username = "sa";
-		String password = "sky123456";
+Properties props=new Properties();
+try{
+props.load(ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties"));
+		String jdbcURL = props.getProperty("jdbcURL");//
+		String jdbcDriver = props.getProperty("jdbcDriver");//
+		String username =props.getProperty("username");//
+		String password =props.getProperty("password");//
 		DbUtils.loadDriver(jdbcDriver);
 		try {
 			conn = DriverManager.getConnection(jdbcURL, username, password);
@@ -33,6 +38,9 @@ public class SqlUtils {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
+} catch (Exception e) {
+	e.printStackTrace();
+} 
 		return conn;
 	}
 

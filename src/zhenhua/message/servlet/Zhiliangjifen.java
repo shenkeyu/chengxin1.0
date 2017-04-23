@@ -30,6 +30,7 @@ public class Zhiliangjifen extends HttpServlet {
     	String personIDcard=request.getParameter("personIDcard");
     	String persondo=request.getParameter("persondo");
     	String fenstring=request.getParameter("personfen");
+    	int erjicheck=Integer.parseInt(request.getParameter("erjicheck"));//质量计分二级计算标识
     	System.out.println(personname+"//");
     	System.out.println(fenstring+"//");
     	float zhiliangbili=(float)0.4;//质量评分所占比例
@@ -46,23 +47,26 @@ public class Zhiliangjifen extends HttpServlet {
     	String hehepersondotime = dateFormat.format(persondotime);//转换显示日期格式
     	System.out.println(hehepersondotime+"看看");
     	System.out.println(personname+"看看");
-    	try{
-		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?)";
-		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
-		SqlUtils sqlUtils=new SqlUtils();
-		flag=sqlUtils.update(sql, param);
-		System.out.println(sql+"////");
-			if(flag){
-					System.out.println("计分成功");
-					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>现在得分为"+String.valueOf(personfenshu)+"分。");
-				}else{
-					System.out.println("计分未成功");
-					out.println("计分未成功");
-				}
-    	}catch(Exception e){
-    		System.out.println("计分未操作未成功");
-    		out.println("计分未操作未成功");
-    	};    	
+    	//////////质量目标只做一次，暂时未做限定//////////
+    	//personfen=0时达到质量目标
+        	try{
+        		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondoerjicheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?,?)";
+        		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),Integer.toString(erjicheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
+        		SqlUtils sqlUtils=new SqlUtils();
+        		flag=sqlUtils.update(sql, param);
+        		System.out.println(sql+"////");
+        			if(flag){
+        					System.out.println("计分成功");
+        					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>上月得分为"+String.valueOf(personfenshu)+"分。");
+        				}else{
+        					System.out.println("计分未成功");
+        					out.println("计分未成功");
+        				}
+            	}catch(Exception e){
+            		System.out.println("计分未操作未成功");
+            		out.println("计分未操作未成功");
+            	};       		
+
     	out.close();
     }  
   

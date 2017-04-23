@@ -36,9 +36,9 @@ out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
 
 	Connection con = null;
  		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER = "sa";
-		String PWD = "sky123456";
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER = session.getAttribute("ssYONGHU").toString();
+		String PWD = session.getAttribute("ssMIMA").toString();
 		con = DriverManager.getConnection(URL, USER, PWD);
 		Statement stmt= con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			      String sql="select * from wai order by fenshu desc";    
@@ -53,15 +53,15 @@ out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
 				  while(rs.next())
 				  {
 				  float fenshu=Float.parseFloat(rs.getString("fenshu").trim());
-							  if(fenshu>120)
+							  if(fenshu>=90)
 							  {
 							  style1="background-image: url(../image/zongtu/lvbj.png);margin-left:20px;margin-top:10px;height: 352px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/lvzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>90&&fenshu<=120)
+							  }else if(fenshu>=80&&fenshu<=89)
 							  {
 							  style1="background-image: url(../image/zongtu/lanbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/lanzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>70&&fenshu<=90)
+							  }else if(fenshu>=70&&fenshu<=79)
 							  {
 							  style1="background-image: url(../image/zongtu/huangbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/huangzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
@@ -113,9 +113,9 @@ System.out.println(e.getMessage());
  try{
 	Connection con1 = null;
  		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");//加载JDBC驱动器类
-		String URL1 = "jdbc:sqlserver://localhost:1433;DatabaseName=zhenhua";//设置连接的数据库      
-		String USER1 = "sa";
-		String PWD1 = "sky123456";
+		String URL1 = "jdbc:sqlserver://localhost:1433;DatabaseName="+session.getAttribute("ssURL").toString();//设置连接的数据库      
+		String USER1 = session.getAttribute("ssYONGHU").toString();
+		String PWD1 = session.getAttribute("ssMIMA").toString();
 		con1 = DriverManager.getConnection(URL1, USER1, PWD1);
 		Statement stmt1= con1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			      String sql1="select * from wai order by fenshu asc";    
@@ -129,15 +129,15 @@ System.out.println(e.getMessage());
 				  while(rs1.next())
 				  {
 				  float fenshu=Float.parseFloat(rs1.getString("fenshu").trim());
-							  if(fenshu>120)
+							  if(fenshu>=90)
 							  {
 							  style3="background-image: url(../image/zongtu/lvbj.png);margin-left:20px;margin-top:10px;height: 352px;width: 302px;";
 							  style4="background-image: url(../image/zongtu/lvzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>90&&fenshu<=120)
+							  }else if(fenshu>=80&&fenshu<=89)
 							  {
 							  style3="background-image: url(../image/zongtu/lanbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style4="background-image: url(../image/zongtu/lanzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>70&&fenshu<=90)
+							  }else if(fenshu>=70&&fenshu<=79)
 							  {
 							  style3="background-image: url(../image/zongtu/huangbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style4="background-image: url(../image/zongtu/huangzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
