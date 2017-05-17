@@ -37,6 +37,23 @@
   </servlet-mapping>
   
   
+      <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>readfilesgd</servlet-name>
+    <servlet-class>zhenhua.message.servlet.readfilesgd</servlet-class>
+    <init-param>
+    <param-name>savePath</param-name>
+    <param-value>uploads</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>readfilesgd</servlet-name>
+    <url-pattern>/readfilesgd</url-pattern>
+  </servlet-mapping>
+  
+  
+  
     <servlet>
     <description>This is the description of my J2EE component shenkeyu</description>
     <display-name>This is the display name of my J2EE component shenkeyu</display-name>
@@ -82,6 +99,23 @@
     <servlet-name>readfilegong</servlet-name>
     <url-pattern>/readfilegong</url-pattern>
   </servlet-mapping>   
+  
+  
+     <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>readhmd</servlet-name>
+    <servlet-class>zhenhua.message.servlet.readhmd</servlet-class>
+    <init-param>
+    <param-name>savePath</param-name>
+    <param-value>uploads</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>readhmd</servlet-name>
+    <url-pattern>/readhmd</url-pattern>
+  </servlet-mapping>
+  
   
     <servlet>
     <description>This is the description of my J2EE component shenkeyu</description>
@@ -139,6 +173,76 @@
     <url-pattern>/Gongjifen</url-pattern>
   </servlet-mapping>
   
+  
+<servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Neishengchanjifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Neishengchanjifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Neishengchanjifen</servlet-name>
+    <url-pattern>/Neishengchanjifen</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Neizhiliangjifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Neizhiliangjifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Neizhiliangjifen</servlet-name>
+    <url-pattern>/Neizhiliangjifen</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Neianquanjifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Neianquanjifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Neianquanjifen</servlet-name>
+    <url-pattern>/Neianquanjifen</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Neijingyanjifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Neijingyanjifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Neijingyanjifen</servlet-name>
+    <url-pattern>/Neijingyanjifen</url-pattern>
+  </servlet-mapping>
+  
+  
+     <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Neigongyijifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Neigongyijifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Neigongyijifen</servlet-name>
+    <url-pattern>/Neigongyijifen</url-pattern>
+  </servlet-mapping>
+  
+  
+       <servlet>
+    <description>This is the description of my J2EE component shenkeyu</description>
+    <display-name>This is the display name of my J2EE component shenkeyu</display-name>
+    <servlet-name>Neizonghejifen</servlet-name>
+    <servlet-class>zhenhua.message.servlet.Neizonghejifen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Neizonghejifen</servlet-name>
+    <url-pattern>/Neizonghejifen</url-pattern>
+  </servlet-mapping>
   
   
   <context-param>

@@ -47,7 +47,7 @@ ID卡号：<input type="text" id="kahaocha" name="kahaocha">
 
 <% }else{
 System.out.println("不可以显示界面！");
-out.println("<b>无查询权限</b>");
+out.println("<br><br><br><center><b><font size='18px'>无查询权限</font></b><center>");
 };%>
 </body>
 </html>

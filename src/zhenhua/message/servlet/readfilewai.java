@@ -128,7 +128,7 @@ public class readfilewai extends HttpServlet {
 			 // System.out.print("成功读取");
 			   // 读取第一章表格内容
 			  //sheet = xwb.getSheetAt(0);
-			  sheet = xwb.getSheet("qiye");
+			  sheet = xwb.getSheet("qiye2");
 			   // 定义 row、cell
 			   XSSFRow row=null;
 			   String cell=null;		

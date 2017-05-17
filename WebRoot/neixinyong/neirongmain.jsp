@@ -53,15 +53,15 @@ out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
 				  while(rs.next())
 				  {
 				  float fenshu=Float.parseFloat(rs.getString("fenshu").trim());
-							  if(fenshu>120)
+							  if(fenshu>90)
 							  {
 							  style1="background-image: url(../image/zongtu/lvbj.png);margin-left:20px;margin-top:10px;height: 352px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/lvzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>90&&fenshu<=120)
+							  }else if(fenshu>90&&fenshu<=90)
 							  {
 							  style1="background-image: url(../image/zongtu/lanbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/lanzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>70&&fenshu<=90)
+							  }else if(fenshu>=70&&fenshu<=80)
 							  {
 							  style1="background-image: url(../image/zongtu/huangbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/huangzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
@@ -86,7 +86,7 @@ out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
 										注册资本：<%=rs.getString("ziben").trim()%>万元
 										<div id="firstfendiv1" style="<%=style2%>">
 										<div style="height:29px;margin-left:210px;margin-top:15px;vertical-align:middle;color:black;font-size:20px;">
-										<%=rs.getFloat("fenshu")%>
+										<%=(float)(Math.round(rs.getFloat("fenshu")*100))/100%>
 										</div>
 										</div>
 										</div>		
@@ -129,15 +129,15 @@ System.out.println(e.getMessage());
 				  while(rs1.next())
 				  {
 				  float fenshu=Float.parseFloat(rs1.getString("fenshu").trim());
-							  if(fenshu>120)
+							  if(fenshu>90)
 							  {
 							  style3="background-image: url(../image/zongtu/lvbj.png);margin-left:20px;margin-top:10px;height: 352px;width: 302px;";
 							  style4="background-image: url(../image/zongtu/lvzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>90&&fenshu<=120)
+							  }else if(fenshu>80&&fenshu<=90)
 							  {
 							  style3="background-image: url(../image/zongtu/lanbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style4="background-image: url(../image/zongtu/lanzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>70&&fenshu<=90)
+							  }else if(fenshu>=70&&fenshu<=80)
 							  {
 							  style3="background-image: url(../image/zongtu/huangbj.png);margin-left:20px;margin-top:10px;height: 354px;width: 302px;";
 							  style4="background-image: url(../image/zongtu/huangzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
@@ -160,7 +160,7 @@ System.out.println(e.getMessage());
 										注册资本：<%=rs1.getString("ziben").trim()%>万元
 										<div id="lastfendiv1" style="<%=style4%>">
 										<div style="height:29px;margin-left:210px;margin-top:15px;vertical-align:middle;color:black;font-size:20px;">
-										<%=rs1.getFloat("fenshu")%>
+										<%=(float)(Math.round(rs1.getFloat("fenshu")*100))/100%>
 										</div>
 										</div>
 										</div>	

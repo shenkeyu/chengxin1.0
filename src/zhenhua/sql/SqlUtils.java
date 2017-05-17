@@ -104,9 +104,13 @@ props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("d
 		try {
 			stmt= conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
 		rs=stmt.executeQuery(sql);
-			if(rs.getRow()>0)
+		System.out.print("查询情况\n");
+		rs.last();
+		int n=rs.getRow();
+			if(n>0)
 			{
 				flag=true;
+				System.out.printf("查询成功\n");
 			};	
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,6 +126,27 @@ props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("d
 		return flag;
 	}
 	
+	
+	public Boolean trucate(String sql) {
+		Connection conn = null;
+		conn = getConnection();
+	    Statement stmt=null;
+	    Boolean flag=false;
+		try {
+			stmt= conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
+		flag=stmt.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				stmt.close();
+				conn.close();
+				}catch (SQLException e) {
+				e.printStackTrace();
+				};
+			}
+		return flag;
+	}
 	
 	public boolean update(String sql,String [] param ){
 		Connection conn = null;

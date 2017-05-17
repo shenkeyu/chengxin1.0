@@ -42,7 +42,7 @@ public class DingqiJobMon implements Job
 	    		while(rs.next())
 	    		{
 	    			String personIDcard=rs.getString("personIDcard");
-	    			String personname=rs.getString("personname");
+	    			String personname=rs.getString("personname").trim();
 	    	        float personfenshu=rs.getFloat("personfenshu");	    			
 	    			float personXWGF=0;
 	    			float personZLXY=0;
@@ -85,7 +85,7 @@ public class DingqiJobMon implements Job
 	    	        //此处特别需要注意加分上限为10分，所以月度分，不是涵盖了所有计分动作；年度计分，也不是简单的把所有计分动作求和;已经平移到日常计分中去计算，此处不再考虑
 	    	        /////////安全诚信等级为甲级，基准分为100分/////
     	        	try{
-    	        		String sql="select * from persondengji where personIDcard='"+personIDcard;
+    	        		String sql="select * from persondengji where personIDcard='"+personIDcard+"'";
     	        		SqlUtils sqlUtils=new SqlUtils();
     	        		Connection conn1 = null;
     	        	    Statement stmt1=null;
@@ -109,7 +109,7 @@ public class DingqiJobMon implements Job
     	        	}; 
 	    	        //////在黑名单内基准分为80分，否则为100分///////
     	        	try{
-    	        		String sql="select * from personheimingdan where personIDcard='"+personIDcard;
+    	        		String sql="select * from personheimingdan where personIDcard='"+personIDcard+"'";
     	        		SqlUtils sqlUtils=new SqlUtils();
     	        		Boolean flag1=sqlUtils.queryjieguo(sql);
     	        		if(flag1)
@@ -141,13 +141,13 @@ public class DingqiJobMon implements Job
 	    	    				SqlUtils sqlUtils3=new SqlUtils();
 	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
 	    	    					if(flag3){
-	    	    					System.out.println(personIDcard+"月度计分成功");
+	    	    					System.out.println(personIDcard+"person月度计分成功");
 	    	    					}else{
-	    	    					System.out.println(personIDcard+"月度计分未成功");
+	    	    					System.out.println(personIDcard+"person月度计分未成功");
 	    	    					}
 	    	    				}
 	    	        	}catch(Exception e){
-	    	        		System.out.println(personIDcard+"月度计分未操作未成功");
+	    	        		System.out.println(personIDcard+"person月度计分未操作未成功");
 	    	        	}; 
 	    	        ////////////////////////////////////////////////////////////////////////////
 	    		}
@@ -169,20 +169,74 @@ public class DingqiJobMon implements Job
         
         
         ///////////内分包商/////////////////////////////////////////////////////////////////////////////
-        ////////////行为规范评价////////////////////
-        
-        
-        //////////////////////////////////////
-        ///////////质量诚信评价///////////////////
-        
-        
-        ////////////////////////////////////
-        ///////////安全诚信评价/////////////////
-        
-        /////////////////////////////////////
-        ///////////////月度最终处理//////////////
-        
-        ////////////////////////////////////
+            ///////////////月度最终处理//////////////
+    		Connection connnei = null;
+    	    Statement stmtnei=null;
+    	    ResultSet rsnei=null;
+        	    try {
+            	String sqlnei="select * from neiMonview";//查看月度求和view
+            	SqlUtils sqlUtilsnei=new SqlUtils();
+            	connnei = sqlUtilsnei.getConnection();
+        		stmtnei= connnei.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
+        		rsnei=stmtnei.executeQuery(sqlnei);
+        		
+    	    		while(rsnei.next())
+    	    		{
+    	    			float neifenshu=0;
+    	    			String neiname=rsnei.getString("name").trim();
+    	    	        neifenshu=rsnei.getFloat("fenshu");//上月的分数值
+    	    	        float neiSC=0,neiZL=0,neiAQ=0,neiJY=0,neiGY=0,neiZH=0;
+    	    	        neiSC=rsnei.getFloat("neiSC");
+    	    	        neiZL=rsnei.getFloat("neiZL");
+    	    	        neiAQ=rsnei.getFloat("neiAQ");
+    	    	        neiJY=rsnei.getFloat("neiJY");
+    	    	        neiGY=rsnei.getFloat("neiGY");
+    	    	        neiZH=rsnei.getFloat("neiZH");
+    	    	        /////////////////////////////////////
+    	    	        /////////////////////////////////////
+    	    	        System.out.println("100分计分");
+    	    			neifenshu=100+(float)(0.4*neiSC+0.2*neiZL+0.2*neiAQ+0.1*neiJY+0.05*neiGY+0.05*neiZH);	//每月100分制时采用，暂时未利用上月的分数值
+    	    			System.out.println(neifenshu+"计分");
+    	    	        neiSC=100+rsnei.getFloat("neiSC");
+    	    	        neiZL=100+rsnei.getFloat("neiZL");
+    	    	        neiAQ=100+rsnei.getFloat("neiAQ");
+    	    	        neiJY=100+rsnei.getFloat("neiJY");
+    	    	        neiGY=100+rsnei.getFloat("neiGY");
+    	    	        neiZH=100+rsnei.getFloat("neiZH");
+    	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
+    	    	    	try{
+    	    	    		String sql2="insert into neiMonthScore (neiname,neifenshu,neiSC,neiZL,neiAQ,neiJY,neiGY,neiZH) values (?,?,?,?,?,?,?,?)";
+    	    	    		String [] param={neiname,String.valueOf(neifenshu),String.valueOf(neiSC),String.valueOf(neiZL),String.valueOf(neiAQ),String.valueOf(neiJY),String.valueOf(neiGY),String.valueOf(neiZH)};
+    	    	    		SqlUtils sqlUtils2=new SqlUtils();
+    	    	    		Boolean flag2=sqlUtils2.update(sql2, param);
+    	    	    			if(flag2){//更新总表
+    	    	    				String sql3="update nei set fenshu=? WHERE name=?";
+    	    	    				String [] param1={String.valueOf(neifenshu),neiname};
+    	    	    				SqlUtils sqlUtils3=new SqlUtils();
+    	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
+    	    	    					if(flag3){
+    	    	    					System.out.println(neiname+"nei月度计分成功");
+    	    	    					}else{
+    	    	    					System.out.println(neiname+"nei月度计分未成功");
+    	    	    					}
+    	    	    				}
+    	    	        	}catch(Exception e){
+    	    	        		System.out.println(neiname+"nei月度计分未操作未成功");
+    	    	        	}; 
+    	    	        ////////////////////////////////////////////////////////////////////////////
+    	    		}
+        		}catch (SQLException e){
+        			e.printStackTrace();
+        		}finally{
+        			try {
+        				rsnei.close();
+        				stmtnei.close();
+        				connnei.close();
+        				}catch (SQLException e) {
+        				e.printStackTrace();
+        				};
+        		}   
+            ////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
         
         
@@ -204,9 +258,9 @@ public class DingqiJobMon implements Job
     	    		while(rswai.next())
     	    		{
     	    			float waifenshu=0;
-    	    			String wainame=rswai.getString("name");
+    	    			String wainame=rswai.getString("name").trim();
     	    	        waifenshu=rswai.getFloat("fenshu");//上月的分数值
-    	    	        float waiZLPJ,waiJHPJ,waiFWPJ=0;
+    	    	        float waiZLPJ=0,waiJHPJ=0,waiFWPJ=0;
     	    	        waiZLPJ=rswai.getFloat("waizhiliangfen");
     	    	        waiJHPJ=rswai.getFloat("waijiaohuoqifen");
     	    	        waiFWPJ=rswai.getFloat("waifuwufen");
@@ -216,9 +270,9 @@ public class DingqiJobMon implements Job
     	    	        System.out.println("100分计分");
     	    			waifenshu=100+(float)(0.45*waiZLPJ+0.45*waiJHPJ+0.1*waiFWPJ);	//每月100分制时采用，暂时未利用上月的分数值
     	    			System.out.println(waifenshu+"计分");
-    	    	        waiZLPJ=100+rswai.getFloat("waiZLPJ");
-    	    	        waiJHPJ=100+rswai.getFloat("waiJHPJ");
-    	    	        waiFWPJ=100+rswai.getFloat("waiFWPJ");
+      	    	        waiZLPJ=100+waiZLPJ;
+      	    	        waiJHPJ=100+waiJHPJ;
+      	    	        waiFWPJ=100+waiFWPJ;
     	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
     	    	    	try{
     	    	    		String sql2="insert into waiMonthScore (wainame,waifenshu,waiZLPJ,waiJHPJ,waiFWPJ) values (?,?,?,?,?)";
@@ -231,13 +285,13 @@ public class DingqiJobMon implements Job
     	    	    				SqlUtils sqlUtils3=new SqlUtils();
     	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
     	    	    					if(flag3){
-    	    	    					System.out.println(wainame+"月度计分成功");
+    	    	    					System.out.println(wainame+"wai月度计分成功");
     	    	    					}else{
-    	    	    					System.out.println(wainame+"月度计分未成功");
+    	    	    					System.out.println(wainame+"wai月度计分未成功");
     	    	    					}
     	    	    				}
     	    	        	}catch(Exception e){
-    	    	        		System.out.println(wainame+"月度计分未操作未成功");
+    	    	        		System.out.println(wainame+"wai月度计分未操作未成功");
     	    	        	}; 
     	    	        ////////////////////////////////////////////////////////////////////////////
     	    		}
@@ -276,9 +330,9 @@ public class DingqiJobMon implements Job
         	    		while(rsgong.next())
         	    		{
         	    			float gongfenshu=0;
-        	    			String gongname=rsgong.getString("name");
+        	    			String gongname=rsgong.getString("name").trim();
         	    	        gongfenshu=rsgong.getFloat("fenshu");//上月的分数值
-        	    	        float gongPZ,gongJQ,gongJG,gongFW,gongQT=0;
+        	    	        float gongPZ=0,gongJQ=0,gongJG=0,gongFW=0,gongQT=0;
         	    	        gongPZ=rsgong.getFloat("gongPZ");
         	    	        gongJQ=rsgong.getFloat("gongJQ");
         	    	        gongJG=rsgong.getFloat("gongJG");
@@ -307,13 +361,13 @@ public class DingqiJobMon implements Job
         	    	    				SqlUtils sqlUtils3=new SqlUtils();
         	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
         	    	    					if(flag3){
-        	    	    					System.out.println(gongname+"月度计分成功");
+        	    	    					System.out.println(gongname+"gong月度计分成功");
         	    	    					}else{
-        	    	    					System.out.println(gongname+"月度计分未成功");
+        	    	    					System.out.println(gongname+"gong月度计分未成功");
         	    	    					}
         	    	    				}
         	    	        	}catch(Exception e){
-        	    	        		System.out.println(gongname+"月度计分未操作未成功");
+        	    	        		System.out.println(gongname+"gong月度计分未操作未成功");
         	    	        	}; 
         	    	        ////////////////////////////////////////////////////////////////////////////
         	    		}

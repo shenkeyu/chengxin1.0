@@ -17,6 +17,7 @@ import org.quartz.JobExecutionException;
 
 
 
+
 import zhenhua.sql.SqlUtils;
 
 public class DingqiJobYear implements Job
@@ -38,7 +39,7 @@ public class DingqiJobYear implements Job
 	    Statement stmt=null;
 	    ResultSet rs=null;
     	    try {
-        	String sql1="select * from personMonthview";//查看年度求和view    where month=12
+        	String sql1="select * from personMonview";//查看年度求和view    where month=12
         	SqlUtils sqlUtils1=new SqlUtils();
         	conn = sqlUtils1.getConnection();
     		stmt= conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
@@ -46,7 +47,7 @@ public class DingqiJobYear implements Job
 	    		while(rs.next())
 	    		{
 	    			String personIDcard=rs.getString("personIDcard");
-	    			String personname=rs.getString("personname");
+	    			String personname=rs.getString("personname").trim();
 	    	        float personfenshu=rs.getFloat("personfenshu");	    			
 	    			float personXWGF=0;
 	    			float personZLXY=0;
@@ -132,13 +133,13 @@ public class DingqiJobYear implements Job
 	    	    				SqlUtils sqlUtils3=new SqlUtils();
 	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
 	    	    					if(flag3){
-	    	    					System.out.println(personIDcard+"年度计分成功");
+	    	    					System.out.println(personIDcard+"person年度计分成功");
 	    	    					}else{
-	    	    					System.out.println(personIDcard+"年度计分未成功");
+	    	    					System.out.println(personIDcard+"person年度计分未成功");
 	    	    					}
 	    	    				}
 	    	        	}catch(Exception e){
-	    	        		System.out.println(personIDcard+"年度计分未操作未成功");
+	    	        		System.out.println(personIDcard+"person年度计分未操作未成功");
 	    	        	}; 
 	    	        ////////////////////////////////////////////////////////////////////////////
 	    		}
@@ -161,20 +162,69 @@ public class DingqiJobYear implements Job
         
         
         ///////////内分包商/////////////////////////////////////////////////////////////////////////////
-        ////////////行为规范评价////////////////////
-        
-        
-        //////////////////////////////////////
-        ///////////质量诚信评价///////////////////
-        
-        
-        ////////////////////////////////////
-        ///////////安全诚信评价/////////////////
-        
-        /////////////////////////////////////
-        ///////////////月度最终处理//////////////
-        
-        ////////////////////////////////////
+            ///////////////年度最终处理//////////////
+    		Connection connnei = null;
+    	    Statement stmtnei=null;
+    	    ResultSet rsnei=null;
+        	    try {
+            	String sqlnei="select * from neiYearview";//查看年 度求和view
+            	SqlUtils sqlUtilsnei=new SqlUtils();
+            	connnei = sqlUtilsnei.getConnection();
+        		stmtnei= connnei.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);	
+        		rsnei=stmtnei.executeQuery(sqlnei);
+        		
+    	    		while(rsnei.next())
+    	    		{
+    	    			float neifenshu=0;
+    	    			String neiname=rsnei.getString("neiname").trim();
+    	    	        neifenshu=rsnei.getFloat("neifenshu")/12;//取12个月的平均分
+    	    	        float neiSC=0,neiZL=0,neiAQ=0,neiJY=0,neiGY=0,neiZH=0;
+    	    	        neiSC=rsnei.getFloat("neiSC")/12;
+    	    	        neiZL=rsnei.getFloat("neiZL")/12;
+    	    	        neiAQ=rsnei.getFloat("neiAQ")/12;
+    	    	        neiJY=rsnei.getFloat("neiJY")/12;
+    	    	        neiGY=rsnei.getFloat("neiGY")/12;
+    	    	        neiZH=rsnei.getFloat("neiZH")/12;
+    	    	        /////////////////////////////////////
+    	    	        /////////////////////////////////////
+    	    	        //System.out.println(neifenshu+"计分");
+    	    	        System.out.println("100分计分");
+    	    			//neifenshu=100+(float)(0.45*neiZLPJ+0.45*neiJHPJ+0.1*neiFWPJ);	//每月100分制时采用，暂时未利用上月的分数值
+    	    			System.out.println(neifenshu+"计分");
+    	    			/////////////////////////////写入月度表，更新总表中个人的分数//////////////////////////////////////
+    	    	    	try{
+    	    	    		String sql2="insert into neiYearScore (neiname,neifenshu,neiSC,neiZL,neiAQ,neiJY,neiGY,neiZH) values (?,?,?,?,?,?,?,?)";
+    	    	    		String [] param={neiname,String.valueOf(neifenshu),String.valueOf(neiSC),String.valueOf(neiZL),String.valueOf(neiAQ),String.valueOf(neiJY),String.valueOf(neiGY),String.valueOf(neiZH)};
+    	    	    		SqlUtils sqlUtils2=new SqlUtils();
+    	    	    		Boolean flag2=sqlUtils2.update(sql2, param);
+    	    	    			if(flag2){//更新总表
+    	    	    				String sql3="update nei set fenshu=? WHERE name=?";
+    	    	    				String [] param1={String.valueOf(neifenshu),neiname};
+    	    	    				SqlUtils sqlUtils3=new SqlUtils();
+    	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
+    	    	    					if(flag3){
+    	    	    					System.out.println(neiname+"nei年度计分成功");
+    	    	    					}else{
+    	    	    					System.out.println(neiname+"nei年度计分未成功");
+    	    	    					}
+    	    	    				}
+    	    	        	}catch(Exception e){
+    	    	        		System.out.println(neiname+"nei年度计分未操作未成功");
+    	    	        	}; 
+    	    	        ////////////////////////////////////////////////////////////////////////////
+    	    		}
+        		}catch (SQLException e){
+        			e.printStackTrace();
+        		}finally{
+        			try {
+        				rsnei.close();
+        				stmtnei.close();
+        				connnei.close();
+        				}catch (SQLException e) {
+        				e.printStackTrace();
+        				};
+        		}   
+            ////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
         
         
@@ -196,7 +246,7 @@ public class DingqiJobYear implements Job
     	    		while(rswai.next())
     	    		{
     	    			float waifenshu=0;
-    	    			String wainame=rswai.getString("wainame");
+    	    			String wainame=rswai.getString("wainame").trim();
     	    	        waifenshu=rswai.getFloat("waifenshu")/12;//取12个月的平均分
     	    	        float waiZLPJ,waiJHPJ,waiFWPJ=0;
     	    	        waiZLPJ=rswai.getFloat("waiZLPJ")/12;
@@ -220,13 +270,13 @@ public class DingqiJobYear implements Job
     	    	    				SqlUtils sqlUtils3=new SqlUtils();
     	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
     	    	    					if(flag3){
-    	    	    					System.out.println(wainame+"年度计分成功");
+    	    	    					System.out.println(wainame+"wai年度计分成功");
     	    	    					}else{
-    	    	    					System.out.println(wainame+"年度计分未成功");
+    	    	    					System.out.println(wainame+"wai年度计分未成功");
     	    	    					}
     	    	    				}
     	    	        	}catch(Exception e){
-    	    	        		System.out.println(wainame+"年度计分未操作未成功");
+    	    	        		System.out.println(wainame+"wai年度计分未操作未成功");
     	    	        	}; 
     	    	        ////////////////////////////////////////////////////////////////////////////
     	    		}
@@ -265,7 +315,7 @@ public class DingqiJobYear implements Job
         	    		while(rsgong.next())
         	    		{
         	    			float gongfenshu=0;
-        	    			String gongname=rsgong.getString("gongname");
+        	    			String gongname=rsgong.getString("gongname").trim();
         	    	        gongfenshu=rsgong.getFloat("gongfenshu")/12;//取12个月的平均分
         	    	        float gongPZ,gongJQ,gongJG,gongFW,gongQT=0;
         	    	        gongPZ=rsgong.getFloat("gongPZ")/12;
@@ -291,13 +341,13 @@ public class DingqiJobYear implements Job
         	    	    				SqlUtils sqlUtils3=new SqlUtils();
         	    	    				boolean flag3=sqlUtils3.update(sql3, param1);
         	    	    					if(flag3){
-        	    	    					System.out.println(gongname+"年度计分成功");
+        	    	    					System.out.println(gongname+"gong年度计分成功");
         	    	    					}else{
-        	    	    					System.out.println(gongname+"年度计分未成功");
+        	    	    					System.out.println(gongname+"gong年度计分未成功");
         	    	    					}
         	    	    				}
         	    	        	}catch(Exception e){
-        	    	        		System.out.println(gongname+"年度计分未操作未成功");
+        	    	        		System.out.println(gongname+"gong年度计分未操作未成功");
         	    	        	}; 
         	    	        ////////////////////////////////////////////////////////////////////////////
         	    		}
@@ -313,6 +363,48 @@ public class DingqiJobYear implements Job
             				};
             		}   
                 ////////////////////////////////////
+            	    
+            	    
+                    ///////////////年度清零最终处理//////////////
+            	    try{	    		
+            	    String sql2="update person set personfenshu=?";
+            	    	    		String [] param={"100"};
+            	    	    		SqlUtils sqlUtilsgaiperson=new SqlUtils();
+            	    	    		Boolean flag2=sqlUtilsgaiperson.update(sql2, param);
+            	    	        	}catch(Exception e){
+            	    	        		System.out.println("gaiperson年度计分未操作未成功");
+            	    }; 
+            	    try{	    		
+            	    String sql2="update nei set fenshu=?";
+            	    	    		String [] param={"100"};
+            	    	    		SqlUtils sqlUtilsgainei=new SqlUtils();
+            	    	    		Boolean flag2=sqlUtilsgainei.update(sql2, param);
+            	    	        	}catch(Exception e){
+            	    	        		System.out.println("gainei年度计分未操作未成功");
+            	    }; 
+            	    try{	    		
+            	    String sql2="update wai set fenshu=?";
+            	    	    		String [] param={"100"};
+            	    	    		SqlUtils sqlUtilsgaiwai=new SqlUtils();
+            	    	    		Boolean flag2=sqlUtilsgaiwai.update(sql2, param);
+            	    	        	}catch(Exception e){
+            	    	        		System.out.println("gaiwai年度计分未操作未成功");
+            	    }; 
+            	    try{	    		
+            	    String sql2="update gong set fenshu=?";
+            	    	    		String [] param={"100"};
+            	    	    		SqlUtils sqlUtilsgaigong=new SqlUtils();
+            	    	    		Boolean flag2=sqlUtilsgaigong.update(sql2, param);
+            	    	        	}catch(Exception e){
+            	    	        		System.out.println("gaigong年度计分未操作未成功");
+            	    }; 
+            	   ////////////////////////////////////////////////////////////////////////////
+
+            	    
+            	    
+            	    
+            	    
+            	    
         ///////////////////////////////////////////////////////////////////////////////////////////////
         
         System.out.println("每年执行的任务结束了！");   

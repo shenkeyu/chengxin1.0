@@ -409,7 +409,7 @@ if(RowCount>0){  %>
 			    fen=parseInt(mubiao-qiwangmubiao);
 			    var fanhui=0;
 			    if(fen<0) fanhui=fen*2;
-			    window.document.getElementsByName("personfen").value=fanhui;
+			    window.document.getElementById("personfenzl").value=fanhui;
 			   // window.document.getElementsByName("persondo").value="低于质量目标"+(-fen)+"个百分点扣"+(-fanhui)+"分";
 			    alert("计分成功！"+"低于质量目标"+(-fen)+"个百分点扣"+(-fanhui)+"分");
 			    return true;
@@ -427,7 +427,7 @@ if(RowCount>0){  %>
 	 }; 
     };
 	</script>
-	<input name="personfen" type="hidden">
+	<input name="personfen" id="personfenzl" type="hidden" value="0">
 	<input name="personfenshu" type="hidden" value="<%=rs.getString("personfenshu")%>">
 	<input name="erjicheck" type="hidden" value="1">
 	<input type="submit" onClick="return jisuan();" value="计分">

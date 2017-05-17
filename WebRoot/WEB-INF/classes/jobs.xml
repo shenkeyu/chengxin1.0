@@ -16,7 +16,7 @@
                 <group>MYTRIGGER_GROUP</group>
                 <job-name>my-very-clever-job</job-name>
                 <job-group>MYJOB_GROUP</job-group>
-                <cron-expression>30 24 18 * * ?</cron-expression>
+                <cron-expression>20 57 00 * * ?</cron-expression>
             </cron>
         </trigger>
     </schedule>

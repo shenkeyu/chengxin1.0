@@ -86,7 +86,7 @@ out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
 										注册资本：<%=rs.getString("ziben").trim()%>万元
 										<div id="firstfendiv1" style="<%=style2%>">
 										<div style="height:29px;margin-left:210px;margin-top:15px;vertical-align:middle;color:black;font-size:20px;">
-										<%=rs.getFloat("fenshu")%>
+										<%=(float)(Math.round(rs.getFloat("fenshu")*100))/100%>
 										</div>
 										</div>
 										</div>		
@@ -160,7 +160,7 @@ System.out.println(e.getMessage());
 										注册资本：<%=rs1.getString("ziben").trim()%>万元
 										<div id="lastfendiv1" style="<%=style4%>">
 										<div style="height:29px;margin-left:210px;margin-top:15px;vertical-align:middle;color:black;font-size:20px;">
-										<%=rs1.getFloat("fenshu")%>
+										<%=(float)(Math.round(rs1.getFloat("fenshu")*100))/100%>
 										</div>
 										</div>
 										</div>	

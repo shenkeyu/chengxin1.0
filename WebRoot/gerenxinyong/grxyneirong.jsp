@@ -127,7 +127,7 @@ if(RowCount>0){
 							  {
 							  style1="background-image: url(../image/zongtu/lanbj.png);margin-left:6px;margin-top:10px;height: 354px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/lanzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
-							  }else if(fenshu>70&&fenshu<=90)
+							  }else if(fenshu>=70&&fenshu<=90)
 							  {
 							  style1="background-image: url(../image/zongtu/huangbj.png);margin-left:6px;margin-top:10px;height: 354px;width: 302px;";
 							  style2="background-image: url(../image/zongtu/huangzong.png);height:69px;width:300px;margin-left:0px;margin-top:20px;vertical-align:middle;";
@@ -153,7 +153,7 @@ if(RowCount>0){
 										卡号：<%=rs3.getString("personIDcard").trim()%>
 										<div id="firstfendiv1" style="<%=style2%>">
 										<div style="height:29px;margin-left:210px;margin-top:15px;vertical-align:middle;color:black;font-size:20px;">
-										<%=rs3.getFloat("personfenshu")%>
+										<%=(float)(Math.round(rs3.getFloat("personfenshu")*100))/100%>
 										</div>
 										</div>
 										</div>		
