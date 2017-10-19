@@ -63,6 +63,15 @@ function getFullPath(obj)
 </script>
 
   <body>
+ <%
+ String quanxian=session.getAttribute("bumen").toString().trim();
+ if(quanxian.equals("综合计划处")){
+System.out.println("管理成功！");
+}else{
+System.out.println("管理失败！");
+out.println("<script>window.alert('没有备份恢复权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
+}; 
+  %>
   <table>
 <tr>
 <td><center>

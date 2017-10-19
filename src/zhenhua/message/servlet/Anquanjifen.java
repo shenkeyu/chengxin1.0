@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import zhenhua.sql.SqlUtils;
 
@@ -68,8 +69,21 @@ public class Anquanjifen extends HttpServlet {
 		System.out.println(sql+"////");
 			if(flag){
 					System.out.println("计分成功");
-					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>上月得分为"+String.valueOf(personfenshu)+"分。");
-				}else{
+					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>上月得分为"+String.valueOf(personfenshu)+"分。<br><a href='javascript:window.history.go(-2)'>返回</a> ");
+			//////////////////////////日志记录//////////////////////////////////
+					String rizhi=personname.trim()+"，因为"+persondo.trim()+"，计"+String.valueOf(personfen).trim()+"分";
+					String sqlrizhi="insert into rizhi (personname,personIDcard,personRecorddo) values (?,?,?)";
+					HttpSession session=request.getSession();
+					String [] paramrizhi={session.getAttribute("usernamecheck").toString(),session.getAttribute("personidcheck").toString(),rizhi};
+					SqlUtils sqlUtilsrizhi=new SqlUtils();
+					boolean flagrizhi=sqlUtilsrizhi.update(sqlrizhi, paramrizhi);
+					if(flagrizhi){
+						System.out.println("日志添加成功！");
+					}else{
+						System.out.println("日志添加不成功！");
+					}
+			//////////////////////////日志记录//////////////////////////////////
+			}else{
 					System.out.println("计分未成功");
 					out.println("计分未成功");
 				}

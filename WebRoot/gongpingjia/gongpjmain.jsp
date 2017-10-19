@@ -26,7 +26,7 @@ if(quanxian1!=""||quanxian1!=null){
 System.out.println("可以查询！");
 }else{
 System.out.println("查询失败！");
-out.println("<script>window.parent.location.href='../zhenhuaindex.html';</script>");
+out.println("<script>window.alert('没有查询管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 if(quanxian1.equals("物资采购部")){
 System.out.println("有权限查询111！");

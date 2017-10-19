@@ -14,10 +14,12 @@
 <%
 String quanxian=session.getAttribute("bumen").toString().trim();
 if(quanxian.equals("综合计划处")){
-System.out.println("用户管理成功！");
+System.out.println("内分包商管理成功！");
 }else{
-System.out.println("用户管理失败！");
-out.println("<script>window.location.href='../。。/zhenhuaindex.html';</script>");
+System.out.println("内分包商管理失败！");
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+out.println("<script>window.alert('没有内分包商管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 
 session.setAttribute("neiming", "");	

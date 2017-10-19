@@ -28,6 +28,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   </script>
   <body>
+    <%
+String quanxian=session.getAttribute("bumen").toString().trim();
+if(quanxian.equals("综合计划处")){
+System.out.println("管理成功！");
+}else{
+System.out.println("管理失败！");
+out.println("<script>window.alert('没有管理权限');window.location.href='"+basePath+"zhenhuaindex.html';</script>");
+};
+%>
     <form id="form1" name="form1" method="post" action="UserServlet">
     <input name="method" type="hidden" value="login" />
   <table width="400" border="1" align="center">

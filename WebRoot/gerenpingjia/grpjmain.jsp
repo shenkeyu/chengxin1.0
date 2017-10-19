@@ -26,7 +26,7 @@ if(quanxian1!=""||quanxian1!=null){
 System.out.println("可以查询！");
 }else{
 System.out.println("查询失败！");
-out.println("<script>window.parent.location.href='../zhenhuaindex.html';</script>");
+out.println("<script>window.alert('没有查询管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 if(quanxian1.equals("人力资源部")||quanxian1.equals("QHSE部")){
 System.out.println("有权限查询111！");
@@ -404,7 +404,8 @@ if(RowCount>0){  %>
 		    if(mubiao!=""&&qiwangmubiao!=""&&mubiao!=null&&qiwangmubiao!=null)
 		    {
 		    	var reg=/^[1-9]\d*$|^0$/; // 注意：故意限制了 0321 这种格式，如不需要，直接reg=/^\d+$/;
-			    if(reg.test(mubiao)==true&&reg.test(qiwangmubiao)==true)
+			    //if(reg.test(mubiao)==true&&reg.test(qiwangmubiao)==true)
+			    if((!isNaN(mubiao))&&((!isNaN(qiwangmubiao))))
 			    {
 			    fen=parseInt(mubiao-qiwangmubiao);
 			    var fanhui=0;
@@ -658,7 +659,7 @@ if(RowCount>0){  %>
      {
     %>  
 	<tr>
-	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personname")%><%=rs.getString("erjicheck")%></td>
+	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personname")%></td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="center"><%=rs.getString("personIDcard")%></td>
 	<td style="border:1px solid #CCCCCC;height:20px;width:500px;"  align="left"><%=rs.getString("persondo") %></td>
 	<td style="border:1px solid #CCCCCC;height:20px;"  align="left"><%=rs.getString("personfen") %></td>

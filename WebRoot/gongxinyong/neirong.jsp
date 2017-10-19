@@ -24,7 +24,9 @@ if(quanxian!=""||quanxian!=null){
 System.out.println("可以查询！");
 }else{
 System.out.println("查询失败！");
-out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+out.println("<script>window.alert('没有查询管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 %>
 <body>
@@ -59,7 +61,7 @@ response.setContentType("text/html;charset=UTF-8");
 		String USER = session.getAttribute("ssYONGHU").toString();
 		String PWD = session.getAttribute("ssMIMA").toString();
 		con3 = DriverManager.getConnection(URL, USER, PWD);
-		System.out.println(session.getAttribute("chaxunyonghu").toString());
+		System.out.println(session.getAttribute("chaxungong").toString());
 		stmt3= con3.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 		String sql3="select * from gong where name like '%"+session.getAttribute("chaxungong").toString().trim()+"%'";    
 		System.out.println(sql3);
@@ -153,7 +155,11 @@ if(RowCount>0){
 										<%=(float)(Math.round(rs3.getFloat("fenshu")*100))/100%>
 										</div>
 										</div>
-										</div>		
+										</div>	
+										<form style="center" action="gongxiangdan.jsp" method="post" >
+										<input name="gongnamexiang" type="hidden" value="<%=rs3.getString("name").trim()%>">
+										<center><input type="submit" onClick="return confirm('确实要查看这个月的计分详细清单');" value="本月详细清单"></center>
+										</form>		
 								</td>
 		 <%
       //下面的语句用于输出最后一条记录时,将指针移到最后一笔记录之后

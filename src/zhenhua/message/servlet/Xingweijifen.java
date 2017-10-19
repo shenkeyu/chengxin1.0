@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import zhenhua.sql.SqlUtils;
 
@@ -30,7 +31,7 @@ public class Xingweijifen extends HttpServlet {
     	String personIDcard=request.getParameter("personIDcard");
     	String persondo=request.getParameter("persondo");
     	String fenstring=request.getParameter("personfen");
-    	int erjicheck=Integer.parseInt(request.getParameter("erjicheck"));//行为计分二级计算标识
+    	int erjicheck=Integer.parseInt(request.getParameter("fenshucheck"));//行为计分二级计算标识
     	System.out.println(personname+"//");
     	System.out.println(fenstring+"//");
     	float xingweibili=(float)0.2;//行为规范所占比例
@@ -63,7 +64,7 @@ public class Xingweijifen extends HttpServlet {
     	personfen=koufenxishu*personfen;//违反两次及以上时扣分放生编号
     	//personfenshu=(float) (personfenshu+xingweibili*personfen);//得到当前的分数  。临时计算当前分数时  	
     	try{
-		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondoerjicheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?)";
+		String sql="insert into persondorecord (personname,personIDcard,persondo,personfen,persondocheck,persondoerjicheck,persondotime,persondoyear,persondomonth,persondoday) values (?,?,?,?,?,?,?,?,?,?)";
 		String [] param={personname,personIDcard,persondo, String.valueOf(personfen), Integer.toString(persondocheck),Integer.toString(erjicheck),hehepersondotime, Integer.toString(persondoyear), Integer.toString(persondomonth), Integer.toString(persondoday)};
 		SqlUtils sqlUtils=new SqlUtils();
 		flag=sqlUtils.update(sql, param);
@@ -76,8 +77,21 @@ public class Xingweijifen extends HttpServlet {
 				//boolean flag2=sqlUtils1.update(sql1, param1);
 				//if(flag2){
 					System.out.println("计分成功");
-					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>上月得分为"+String.valueOf(personfenshu)+"分。");
-				}else{
+					out.println("计分成功!<br>"+personname+"<br>因为"+persondo+"<br>计"+String.valueOf(personfen)+"分<br>上月得分为"+String.valueOf(personfenshu)+"分。<br><a href='javascript:window.history.go(-2)'>返回</a>");
+					//////////////////////////日志记录//////////////////////////////////
+					String rizhi=personname.trim()+"，因为"+persondo.trim()+"，计"+String.valueOf(personfen).trim()+"分";
+					String sqlrizhi="insert into rizhi (personname,personIDcard,personRecorddo) values (?,?,?)";
+					HttpSession session=request.getSession();
+					String [] paramrizhi={session.getAttribute("usernamecheck").toString(),session.getAttribute("personidcheck").toString(),rizhi};
+					SqlUtils sqlUtilsrizhi=new SqlUtils();
+					boolean flagrizhi=sqlUtilsrizhi.update(sqlrizhi, paramrizhi);
+					if(flagrizhi){
+						System.out.println("日志添加成功！");
+					}else{
+						System.out.println("日志添加不成功！");
+					}
+			//////////////////////////日志记录//////////////////////////////////
+			}else{
 					System.out.println("计分未成功");
 					out.println("计分未成功");
 				//}

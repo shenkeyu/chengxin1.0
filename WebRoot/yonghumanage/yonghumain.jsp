@@ -6,7 +6,10 @@
 
 <title>振华诚信信息管理系统</title>
 </head>
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body onload="javascript:document.getElementById('yonghukahao').focus();">
 <div style="background:#1845EA;color:#FFFFFF;margin-left:20px;margin-top:11px;height:50px;line-height:50px;overflow:hidden;font-size:25px;font:黑体,宋体;margin-bottom:0px;padding-bottom:0px;width:100%;">
 <div style="margin-top:7px;"><img src="../image/menu/self_16.png" alt="用户管理" style="height:22px;width:22px;vertical-align:middle;"/>用户管理</div>
@@ -17,7 +20,7 @@ if(quanxian.equals("综合计划处")){
 System.out.println("用户管理成功！");
 }else{
 System.out.println("用户管理失败！");
-out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
+out.println("<script>window.alert('没有用户管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 
 session.setAttribute("yonghuming", "");

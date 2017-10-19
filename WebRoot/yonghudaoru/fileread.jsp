@@ -21,7 +21,15 @@ function downfile(str)
   window.location.href = str;
 }
 </script>
-
+<%
+String quanxian=session.getAttribute("bumen").toString().trim();
+if(quanxian.equals("综合计划处")){
+System.out.println("用户导入管理成功！");
+}else{
+System.out.println("用户导入管理失败！");
+out.println("<script>window.alert('没有用户导入管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
+};
+%>
   <body>
   <form name="form1" style="center" action="readfile" method="post" enctype="multipart/form-data">
   <label></label>

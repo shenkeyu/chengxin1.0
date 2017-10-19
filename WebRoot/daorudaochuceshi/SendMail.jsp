@@ -23,6 +23,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+    <%
+String quanxian=session.getAttribute("bumen").toString().trim();
+if(quanxian.equals("综合计划处")){
+System.out.println("管理成功！");
+}else{
+System.out.println("管理失败！");
+out.println("<script>window.alert('没有管理权限');window.location.href='"+basePath+"zhenhuaindex.html';</script>");
+};
+%>
     <form action="SendMail" enctype="multipart/form-data" method="post">
     <table cellspacing="2" cellpadding="2" border="0">      
       <tr><td>收件人</td><td>

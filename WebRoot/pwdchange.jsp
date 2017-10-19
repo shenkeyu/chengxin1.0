@@ -5,6 +5,18 @@
 <link rel="stylesheet" type="text/css" href="css/indexkongzhiright.css">
 <title>振华诚信信息管理系统</title>
 </head>
+<%
+String quanxian=session.getAttribute("usernamecheck").toString().trim();
+if(quanxian!=""||quanxian!=null){
+System.out.println("可以查询！");
+System.out.println(quanxian);
+}else{
+System.out.println("查询失败！");
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+out.println("<script>window.alert('不合法用户');window.parent.location.href='"+basePath+"zhenhuaindex.html';</script>");
+};
+%>
 <body id="changemimabody" onload="javascript:loadmimaye();">
 	<form  name="changeform" method="post" target="_self" action="deal/dealmimachange.jsp">
 		<div style="margin-left:30px;margin-top:20px;font-size:25px;">

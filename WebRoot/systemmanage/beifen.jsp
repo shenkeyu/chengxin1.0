@@ -3,10 +3,12 @@
 <%
 String quanxian=session.getAttribute("bumen").toString().trim();
 if(quanxian.equals("综合计划处")){
-System.out.println("用户管理成功！");
+System.out.println("管理成功！");
 }else{
-System.out.println("用户管理失败！");
-out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
+System.out.println("管理失败！");
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+out.println("<script>window.alert('没有备份权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 
 

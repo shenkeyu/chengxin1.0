@@ -22,7 +22,9 @@ if(quanxian!=""||quanxian!=null){
 System.out.println("可以查询！");
 }else{
 System.out.println("查询失败！");
-out.println("<script>window.location.href='../zhenhuaindex.html';</script>");
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+out.println("<script>window.alert('没有查询管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 
 session.setAttribute("chaxunnei", "");

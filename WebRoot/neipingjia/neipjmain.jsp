@@ -26,7 +26,7 @@ if(quanxian1!=""||quanxian1!=null){
 System.out.println("可以查询！");
 }else{
 System.out.println("查询失败！");
-out.println("<script>window.parent.location.href='../zhenhuaindex.html';</script>");
+out.println("<script>window.alert('没有查询管理权限');window.location.href='"+basePath+"gerenxinyong/grxymain.jsp';</script>");
 };
 if(quanxian1.equals("工艺装备部")||quanxian1.equals("QHSE部")||quanxian1.equals("生产管理部")){
 System.out.println("有权限查询111！");
@@ -186,7 +186,8 @@ if(RowCount>0){  %>
 		    if(mubiao!=""&&mubiao!=null)
 		    {
 		    	var reg=/^[1-9]\d*$|^0$/; // 注意：故意限制了 0321 这种格式，如不需要，直接reg=/^\d+$/;
-			    if(reg.test(mubiao)==true)
+			    //if(reg.test(mubiao)==true)
+			    if(!isNaN(mubiao))
 			    {
 			    tei=parseInt(mubiao-90);
 			    te=parseFloat(tei);
@@ -859,7 +860,8 @@ if(RowCount>0){  %>
 		    if(hegelv!=""&&hegelv!=null)
 		    {
 		    	var reg=/^[1-9]\d*$|^0$/; // 注意：故意限制了 0321 这种格式，如不需要，直接reg=/^\d+$/;
-			    if(reg.test(hegelv)==true)
+			    //if(reg.test(hegelv)==true)
+			    if(!isNaN(hegelv))
 			    {
 			    fen=parseInt(hegelv-100);
 			    var fanhui=0;
