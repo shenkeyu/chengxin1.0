@@ -1,0 +1,1 @@
+backup database zhenhua to disk='D:/zhenhua20171019.bak'

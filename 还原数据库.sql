@@ -1,0 +1,1 @@
+restore database zhenhua from disk='D:/zhenhua20171019.bak'
